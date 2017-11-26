@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using Dicom;
 using Dicom.Imaging;
+using System.Drawing.Imaging;
 
 namespace ReadApp
 {
@@ -9,16 +10,17 @@ namespace ReadApp
         public MainForm()
         {
             InitializeComponent();
+            ReadDICOMFile();
         }
 
         public void ReadDICOMFile()
         {
-           // Read DICOM file
-            var file = DicomFile.Open("result.dcm");
-            //Get Patient Info
-            var name = file.Dataset.Get<string>(DicomTag.PatientAddress);
+            //// Read DICOM file
+            //var file = DicomFile.Open("3");
+            ////Get Patient Info
+            //var name = file.Dataset.Get<string>(DicomTag.PatientAddress);
             //get list image of dicom file
-            var image = new DicomImage("goodSample");
+            var image = new DicomImage("86698558");
             //Check Path is exist or not
             var dataPath = Application.StartupPath + "\\data\\";
             if (!System.IO.Directory.Exists(dataPath))
@@ -28,7 +30,8 @@ namespace ReadApp
             //Loop to save all image to data folder
             for (int i = 0; i < image.NumberOfFrames; i++)
             {
-                image.RenderImage(i).AsBitmap().Save(dataPath + i + ".jpg");
+                //image.RenderImage(i).AsBitmap().Save(dataPath + "86697621_frame" + i + ".jpg");
+                image.RenderImage(i).AsBitmap().Save(dataPath + "86698558_frame" + (i+1) + ".tiff", ImageFormat.Tiff);
             }
         }
 
