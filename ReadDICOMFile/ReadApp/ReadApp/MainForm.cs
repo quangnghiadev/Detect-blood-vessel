@@ -50,5 +50,10 @@ namespace ReadApp
             bool result = (bool)res[0];
             System.Console.WriteLine("Result: " + result);
         }
+
+        private void MainForm_Load(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
