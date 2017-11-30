@@ -1,6 +1,12 @@
 ﻿using System.Windows.Forms;
-using Dicom;
-using Dicom.Imaging;
+using ReadApp.Helper;
+using SegmentImage;
+using SegmentImageNative;
+using fuck;
+using MLApp;
+using MathWorks.MATLAB.NET.Arrays;
+using System;
+using System.Drawing;
 
 namespace ReadApp
 {
@@ -9,43 +15,57 @@ namespace ReadApp
         public MainForm()
         {
             InitializeComponent();
+            SegmentImage.MLBridge segment = new SegmentImage.MLBridge();
+            fuck.Class1 cl = new fuck.Class1();
+           
+
+
+
+
+
+
+
+
+
+
+            MWArray boj = cl.fuck();
+            
+
+            if (boj.IsNumericArray)
+            {
+                Console.WriteLine("short %d" + boj.NumberofDimensions + "element" +boj.NumberOfElements);
+                int[] dim = boj.Dimensions;
+                byte[] fuck = new byte[512*512];
+                MWNumericArray item2 = (MWNumericArray)boj;
+                byte[,,] arr = (byte[,,])item2.ToArray(MWArrayComponent.Real);
+                for (int i = 0; i < 512; i++)
+                {
+                    for (int j = 0; j < 512; j++)
+                    {
+                        fuck[i*j] = arr[0, i, j];
+                    }
+                }
+                
+
+                using (var ms = new System.IO.MemoryStream(fuck))
+                {
+                    using (var img = Image.FromStream(ms))
+                    {
+                        Console.WriteLine("hahahahaha");
+                    }
+                }
+            }
+            
+
         }
 
-        public void ReadDICOMFile()
+       
+
+        
+
+        private void MainForm_Load(object sender, System.EventArgs e)
         {
-           // Read DICOM file
-            var file = DicomFile.Open("result.dcm");
-            //Get Patient Info
-            var name = file.Dataset.Get<string>(DicomTag.PatientAddress);
-            //get list image of dicom file
-            var image = new DicomImage("goodSample");
-            //Check Path is exist or not
-            var dataPath = Application.StartupPath + "\\data\\";
-            if (!System.IO.Directory.Exists(dataPath))
-            {
-                System.IO.Directory.CreateDirectory(dataPath);
-            }
-            //Loop to save all image to data folder
-            for (int i = 0; i < image.NumberOfFrames; i++)
-            {
-                image.RenderImage(i).AsBitmap().Save(dataPath + i + ".jpg");
-            }
-        }
 
-        public void CallMatlabFunc()
-        {
-            // Create the MATLAB instance 
-            MLApp.MLApp matlab = new MLApp.MLApp();
-
-            matlab.Execute("cd " + Application.StartupPath);
-
-            object isReadOK = null;
-            var imagePath = Application.StartupPath + "\\data\\1.jpg";
-            matlab.Feval("processImage", 1, out isReadOK, imagePath);
-
-            object[] res = isReadOK as object[];
-            bool result = (bool)res[0];
-            System.Console.WriteLine("Result: " + result);
         }
     }
 }

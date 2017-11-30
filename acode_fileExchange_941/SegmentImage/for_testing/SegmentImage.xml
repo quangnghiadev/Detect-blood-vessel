@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SegmentImage</name>
+    </assembly>
+    <members>
+        <member name="T:SegmentImage.MLBridge">
+            <summary>
+            The MLBridge class provides a CLS compliant, MWArray interface to the MATLAB
+            functions contained in the files:
+            <newpara></newpara>
+            C:\Users\Asus\Documents\Detect-blood-vessel\acode_fileExchange_941\SegmentImage.m
+            </summary>
+            <remarks>
+            @Version 0.0
+            </remarks>
+        </member>
+        <member name="M:SegmentImage.MLBridge.#cctor">
+            <summary internal= "true">
+            The static constructor instantiates and initializes the MATLAB Runtime instance.
+            </summary>
+        </member>
+        <member name="M:SegmentImage.MLBridge.#ctor">
+            <summary>
+            Constructs a new instance of the MLBridge class.
+            </summary>
+        </member>
+        <member name="M:SegmentImage.MLBridge.Finalize">
+            <summary internal= "true">
+            Class destructor called by the CLR garbage collector.
+            </summary>
+        </member>
+        <member name="M:SegmentImage.MLBridge.Dispose">
+            <summary>
+            Frees the native resources associated with this object
+            </summary>
+        </member>
+        <member name="M:SegmentImage.MLBridge.Dispose(System.Boolean)">
+            <summary internal= "true">
+            Internal dispose function
+            </summary>
+        </member>
+        <member name="M:SegmentImage.MLBridge.SegmentImage">
+             <summary>
+             Provides a single output, 0-input MWArrayinterface to the SegmentImage MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             SEGMENTIMAGE Summary of this function goes here
+             Detailed explanation goes here
+             </remarks>
+             <returns>An MWArray containing the first output argument.</returns>
+            
+        </member>
+        <member name="M:SegmentImage.MLBridge.SegmentImage(System.Int32)">
+             <summary>
+             Provides the standard 0-input MWArray interface to the SegmentImage MATLAB
+             function.
+             </summary>
+             <remarks>
+             M-Documentation:
+             SEGMENTIMAGE Summary of this function goes here
+             Detailed explanation goes here
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return.</param>
+             <returns>An Array of length "numArgsOut" containing the output
+             arguments.</returns>
+            
+        </member>
+        <member name="M:SegmentImage.MLBridge.SegmentImage(System.Int32,MathWorks.MATLAB.NET.Arrays.MWArray[]@,MathWorks.MATLAB.NET.Arrays.MWArray[])">
+             <summary>
+             Provides an interface for the SegmentImage function in which the input and output
+             arguments are specified as an array of MWArrays.
+             </summary>
+             <remarks>
+             This method will allocate and return by reference the output argument
+             array.<newpara></newpara>
+             M-Documentation:
+             SEGMENTIMAGE Summary of this function goes here
+             Detailed explanation goes here
+             </remarks>
+             <param name="numArgsOut">The number of output arguments to return</param>
+             <param name= "argsOut">Array of MWArray output arguments</param>
+             <param name= "argsIn">Array of MWArray input arguments</param>
+            
+        </member>
+        <member name="M:SegmentImage.MLBridge.WaitForFiguresToDie">
+             <summary>
+             This method will cause a MATLAB figure window to behave as a modal dialog box.
+             The method will not return until all the figure windows associated with this
+             component have been closed.
+             </summary>
+             <remarks>
+             An application should only call this method when required to keep the
+             MATLAB figure window from disappearing.  Other techniques, such as calling
+             Console.ReadLine() from the application should be considered where
+             possible.</remarks>
+            
+        </member>
+    </members>
+</doc>
