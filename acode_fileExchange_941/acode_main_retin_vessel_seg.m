@@ -1,6 +1,7 @@
 clear
 clc
-im=imread('86698558_frame15.tiff');
+close all
+im=imread('86698558_frame20.tiff');
 bw_mask=imread('mask.tif');
 bw_mask=logical(bw_mask);
 ref_im=imread('86698558_frame15_output.jpg');
