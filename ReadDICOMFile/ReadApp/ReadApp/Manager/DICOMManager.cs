@@ -51,25 +51,25 @@ namespace ReadApp.Manager
         {
             var listInfo = new List<DICOMInfo>();
             //Patient
-            listInfo.Add(new DICOMInfo(DicomTag.PatientName.ToString(), image.Dataset.Get<string>(DicomTag.PatientName)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientID.ToString(), image.Dataset.Get<string>(DicomTag.PatientID)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientBirthDate.ToString(), image.Dataset.Get<string>(DicomTag.PatientBirthDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientSex.ToString(), image.Dataset.Get<string>(DicomTag.PatientSex)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientAge.ToString(), image.Dataset.Get<string>(DicomTag.PatientAge)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientWeight.ToString(), image.Dataset.Get<string>(DicomTag.PatientWeight)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientAddress.ToString(), image.Dataset.Get<string>(DicomTag.PatientAddress)));
-
+            listInfo.Add(new DICOMInfo(DicomTag.PatientName.ToString(), "Patient Name", image.Dataset.Get<string>(DicomTag.PatientName)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientID.ToString(), "Patient ID", image.Dataset.Get<string>(DicomTag.PatientID)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientBirthDate.ToString(), "Patient Birth Date", image.Dataset.Get<string>(DicomTag.PatientBirthDate)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientSex.ToString(), "Patient Sex", image.Dataset.Get<string>(DicomTag.PatientSex)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientAge.ToString(), "Patient Age", image.Dataset.Get<string>(DicomTag.PatientAge)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientWeight.ToString(), "Patient Weight", image.Dataset.Get<string>(DicomTag.PatientWeight)));
+            listInfo.Add(new DICOMInfo(DicomTag.PatientAddress.ToString(), "Patient Address", image.Dataset.Get<string>(DicomTag.PatientAddress)));
+            listInfo.Add(new DICOMInfo());
             //Study
-            listInfo.Add(new DICOMInfo(DicomTag.StudyDate.ToString(), image.Dataset.Get<string>(DicomTag.StudyDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyTime.ToString(), image.Dataset.Get<string>(DicomTag.StudyTime)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyID.ToString(), image.Dataset.Get<string>(DicomTag.StudyID)));
-            listInfo.Add(new DICOMInfo(DicomTag.ModalitiesInStudy.ToString(), image.Dataset.Get<string>(DicomTag.ModalitiesInStudy)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyDescription.ToString(), image.Dataset.Get<string>(DicomTag.StudyDescription)));
-
+            listInfo.Add(new DICOMInfo(DicomTag.StudyDate.ToString(), "Study Date", image.Dataset.Get<string>(DicomTag.StudyDate)));
+            listInfo.Add(new DICOMInfo(DicomTag.StudyTime.ToString(), "Study Time", image.Dataset.Get<string>(DicomTag.StudyTime)));
+            listInfo.Add(new DICOMInfo(DicomTag.StudyID.ToString(), "Study ID", image.Dataset.Get<string>(DicomTag.StudyID)));
+            listInfo.Add(new DICOMInfo(DicomTag.Modality.ToString(), "Study Modality", image.Dataset.Get<string>(DicomTag.Modality)));
+            listInfo.Add(new DICOMInfo(DicomTag.StudyDescription.ToString(), "Study Description", image.Dataset.Get<string>(DicomTag.StudyDescription)));
+            listInfo.Add(new DICOMInfo());
             //Series
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesDate.ToString(), image.Dataset.Get<string>(DicomTag.SeriesDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesTime.ToString(), image.Dataset.Get<string>(DicomTag.SeriesTime)));
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesDescription.ToString(), image.Dataset.Get<string>(DicomTag.SeriesDescription)));
+            listInfo.Add(new DICOMInfo(DicomTag.SeriesDate.ToString(), "Series Date", image.Dataset.Get<string>(DicomTag.SeriesDate)));
+            listInfo.Add(new DICOMInfo(DicomTag.SeriesTime.ToString(), "Series Time", image.Dataset.Get<string>(DicomTag.SeriesTime)));
+            listInfo.Add(new DICOMInfo(DicomTag.SeriesDescription.ToString(), "Series Description", image.Dataset.Get<string>(DicomTag.SeriesDescription)));
 
             return listInfo;
         }

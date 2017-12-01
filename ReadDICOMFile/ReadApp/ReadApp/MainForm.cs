@@ -2,6 +2,8 @@
 using Dicom;
 using Dicom.Imaging;
 using System.Drawing.Imaging;
+using ReadApp.Manager;
+using System.Data;
 
 namespace ReadApp
 {
@@ -23,8 +25,24 @@ namespace ReadApp
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                System.Console.WriteLine(openFileDialog1.FileName);
+                DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
+                FillPatientInformationGridView();
             }
+        }
+
+        private void FillPatientInformationGridView()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("TagName", System.Type.GetType("System.String"));
+            table.Columns.Add("TagDes", System.Type.GetType("System.String"));
+            table.Columns.Add("TagValue", System.Type.GetType("System.String"));
+            var list = DICOMManager.shared.GetPatientInformation();
+            foreach (var item in list)
+            {
+                table.Rows.Add(item.TagName, item.TagDescription, item.TagValue);
+            }
+            dataGridViewPatientInfo.DataSource = table;
+            dataGridViewPatientInfo.Columns[0].Visible = false;
         }
     }
 }

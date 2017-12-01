@@ -10,16 +10,19 @@ namespace ReadApp.Model
     {
         private string tagName;
         private string tagValue;
+        private string tagDescription;
 
         public DICOMInfo()
         {
             tagName = "";
             tagValue = "";
+            tagDescription = "";
         }
 
-        public DICOMInfo(string tagName, string tagValue)
+        public DICOMInfo(string tagName, string tagDes, string tagValue)
         {
             this.tagValue = tagValue;
+            this.tagDescription = tagDes;
             this.tagName = tagName;
         }
 
@@ -32,6 +35,18 @@ namespace ReadApp.Model
             set
             {
                 tagName = value;
+            }
+        }
+
+        public string TagDescription
+        {
+            get
+            {
+                return tagDescription;
+            }
+            set
+            {
+                tagDescription = value;
             }
         }
 
@@ -49,7 +64,7 @@ namespace ReadApp.Model
 
         public string GetDescription()
         {
-            return tagName + ": " + tagValue;
+            return tagDescription + ": " + tagValue;
         }
     }
 }
