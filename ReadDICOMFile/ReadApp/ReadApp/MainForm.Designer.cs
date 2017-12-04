@@ -39,8 +39,9 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dataGridViewPatientInfo = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -48,14 +49,18 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.dataGridViewPatientInfo = new System.Windows.Forms.DataGridView();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.tbFrame = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -66,14 +71,14 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientInfo)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientInfo)).BeginInit();
-            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -118,6 +123,11 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.tbFrame);
+            this.panel1.Controls.Add(this.btnStop);
+            this.panel1.Controls.Add(this.btnPlay);
+            this.panel1.Controls.Add(this.btnNext);
+            this.panel1.Controls.Add(this.btnPrevious);
             this.panel1.Controls.Add(this.buttonOpen);
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
@@ -189,16 +199,6 @@
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 0;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(737, 583);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -209,6 +209,31 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(260, 583);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.dataGridViewPatientInfo);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(252, 557);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Patient Information";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViewPatientInfo
+            // 
+            this.dataGridViewPatientInfo.AllowUserToAddRows = false;
+            this.dataGridViewPatientInfo.AllowUserToDeleteRows = false;
+            this.dataGridViewPatientInfo.AllowUserToResizeRows = false;
+            this.dataGridViewPatientInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewPatientInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPatientInfo.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewPatientInfo.Name = "dataGridViewPatientInfo";
+            this.dataGridViewPatientInfo.ReadOnly = true;
+            this.dataGridViewPatientInfo.RowHeadersVisible = false;
+            this.dataGridViewPatientInfo.Size = new System.Drawing.Size(246, 551);
+            this.dataGridViewPatientInfo.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -296,26 +321,6 @@
             this.comboBox1.Size = new System.Drawing.Size(75, 21);
             this.comboBox1.TabIndex = 1;
             // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.Location = new System.Drawing.Point(1093, 7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 6;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = global::ReadApp.Properties.Resources.toggle_expand;
-            this.button2.Location = new System.Drawing.Point(1225, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 20);
-            this.button2.TabIndex = 5;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // trackBar1
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -343,30 +348,85 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Frame: ";
             // 
-            // dataGridViewPatientInfo
+            // button3
             // 
-            this.dataGridViewPatientInfo.AllowUserToAddRows = false;
-            this.dataGridViewPatientInfo.AllowUserToDeleteRows = false;
-            this.dataGridViewPatientInfo.AllowUserToResizeRows = false;
-            this.dataGridViewPatientInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewPatientInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewPatientInfo.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewPatientInfo.Name = "dataGridViewPatientInfo";
-            this.dataGridViewPatientInfo.ReadOnly = true;
-            this.dataGridViewPatientInfo.RowHeadersVisible = false;
-            this.dataGridViewPatientInfo.Size = new System.Drawing.Size(246, 551);
-            this.dataGridViewPatientInfo.TabIndex = 0;
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
+            this.button3.Location = new System.Drawing.Point(1093, 7);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(20, 20);
+            this.button3.TabIndex = 6;
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // tabPage1
+            // button2
             // 
-            this.tabPage1.Controls.Add(this.dataGridViewPatientInfo);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(252, 557);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Patient Information";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = global::ReadApp.Properties.Resources.toggle_expand;
+            this.button2.Location = new System.Drawing.Point(1225, 7);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(20, 20);
+            this.button2.TabIndex = 5;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(737, 583);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Image = global::ReadApp.Properties.Resources.left_arrow;
+            this.btnPrevious.Location = new System.Drawing.Point(394, 0);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(48, 43);
+            this.btnPrevious.TabIndex = 1;
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = global::ReadApp.Properties.Resources.right_arrow;
+            this.btnNext.Location = new System.Drawing.Point(448, 0);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(48, 43);
+            this.btnNext.TabIndex = 1;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.Image = global::ReadApp.Properties.Resources.pause;
+            this.btnPlay.Location = new System.Drawing.Point(534, 0);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(48, 43);
+            this.btnPlay.TabIndex = 1;
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.Image = global::ReadApp.Properties.Resources.stop;
+            this.btnStop.Location = new System.Drawing.Point(588, 0);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(48, 43);
+            this.btnStop.TabIndex = 1;
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // tbFrame
+            // 
+            this.tbFrame.Location = new System.Drawing.Point(719, 14);
+            this.tbFrame.Name = "tbFrame";
+            this.tbFrame.Size = new System.Drawing.Size(60, 20);
+            this.tbFrame.TabIndex = 2;
+            this.tbFrame.TextChanged += new System.EventHandler(this.tbFrame_TextChanged);
+            this.tbFrame.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFrame_KeyDown);
+            this.tbFrame.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFrame_KeyPress);
             // 
             // MainForm
             // 
@@ -385,6 +445,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -393,15 +454,15 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientInfo)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientInfo)).EndInit();
-            this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -436,5 +497,10 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.DataGridView dataGridViewPatientInfo;
+        private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnPlay;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.TextBox tbFrame;
     }
 }

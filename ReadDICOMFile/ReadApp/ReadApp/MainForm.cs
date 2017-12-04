@@ -5,16 +5,87 @@ using System.Drawing.Imaging;
 using ReadApp.Manager;
 using System.Data;
 
+
+
+using System.Drawing.Imaging;
+using System;
+using System.IO;
+
+using System.Linq;
+using System.Drawing;
+
 namespace ReadApp
 {
     public partial class MainForm : Form
     {
+        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        int i = 1;
+        String dataPath = Application.StartupPath + "\\data\\";
+        int currentIndex = 86698558;
+        int currentCount;
         public MainForm()
         {
             InitializeComponent();
+            currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*.jpg", SearchOption.AllDirectories)
+                            select file).Count();
+            myTimer.Tick += new EventHandler(TimerEventProcessor);
+
+            // Sets the timer interval to 5 seconds.
+            myTimer.Interval = 80;
+            myTimer.Start();
         }
 
-        
+        private void TimerEventProcessor(Object myObject,
+                                              EventArgs myEventArgs)
+        {
+
+            myTimer.Stop();
+
+            // Displays a message box asking whether to continue running the timer.
+            myTimer.Enabled = true;
+            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+            tbFrame.Text = (i%currentCount).ToString();
+            i += 1;
+        }
+
+        private string getFullPath()
+        {
+            return dataPath + currentIndex + "\\";
+        }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            myTimer.Enabled = !myTimer.Enabled;
+            btnPlay.Image = !myTimer.Enabled ? Properties.Resources.play_button : Properties.Resources.pause;
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            i = 0;
+            pause();
+            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            i += 1;
+            pause();
+            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+        }
+
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            i -= 1;
+            pause();
+            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+        }
+
+        private void pause()
+        {
+            myTimer.Enabled = false;
+            btnPlay.Image = Properties.Resources.play_button;
+            tbFrame.Text = (i % currentCount).ToString();
+        }
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
@@ -43,6 +114,29 @@ namespace ReadApp
             }
             dataGridViewPatientInfo.DataSource = table;
             dataGridViewPatientInfo.Columns[0].Visible = false;
+        }
+
+        private void tbFrame_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                i = Int32.Parse(tbFrame.Text)%currentCount;
+                pause();
+                pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+            }
+        }
+
+        private void tbFrame_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void tbFrame_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
