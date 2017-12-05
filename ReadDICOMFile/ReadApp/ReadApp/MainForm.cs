@@ -2,36 +2,31 @@
 using ReadApp.Manager;
 using System.Data;
 using System;
-using System.IO;
-using System.Windows.Forms;
-using System.Linq;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 
 namespace ReadApp
 {
     public partial class MainForm : Form
     {
-<<<<<<< HEAD
-        static Timer myTimer = new System.Windows.Forms.Timer();
-        int i = 1;
-=======
-        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        static Timer myTimer = new Timer();
         int currentFrame = 1;
->>>>>>> 7201b18e504e35c05abbf5b61e96a099ff41b83c
+        string defaultImageFormat = "." + ImageFormat.Tiff.ToString();
         String dataPath = Application.StartupPath + "\\data\\";
         int currentIndex = 86698558;
         int currentCount;
         public MainForm()
         {
             InitializeComponent();
-            //currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*.jpg", SearchOption.AllDirectories)
-            //                select file).Count();
-            //myTimer.Tick += new EventHandler(TimerEventProcessor);
+            currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*" + defaultImageFormat, SearchOption.AllDirectories)
+                            select file).Count();
+            myTimer.Tick += new EventHandler(TimerEventProcessor);
 
-            //// Sets the timer interval to 5 seconds.
-            //myTimer.Interval = 80;
-            //myTimer.Start();
+            // Sets the timer interval to 5 seconds.
+            myTimer.Interval = 80;
+            myTimer.Start();
         }
 
         private void TimerEventProcessor(Object myObject,
@@ -42,7 +37,7 @@ namespace ReadApp
 
             // Displays a message box asking whether to continue running the timer.
             myTimer.Enabled = true;
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
             tbFrame.Text = (currentFrame % currentCount).ToString();
             currentFrame += 1;
         }
@@ -62,21 +57,21 @@ namespace ReadApp
         {
             currentFrame = 0;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
             currentFrame += 1;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
             currentFrame -= 1;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
         }
 
         private void pause()
@@ -96,24 +91,41 @@ namespace ReadApp
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
-                FillPatientInformationGridView();
+                FillPatientTagToGridView();
+                DICOMManager.shared.GetAllTag();
+                FillAllTagToGridView();
                 DICOMManager.shared.ExportAllFrameToTempFolder();
             }
         }
 
-        private void FillPatientInformationGridView()
+        private void FillPatientTagToGridView()
         {
             DataTable table = new DataTable();
             table.Columns.Add("TagName", System.Type.GetType("System.String"));
             table.Columns.Add("TagDes", System.Type.GetType("System.String"));
             table.Columns.Add("TagValue", System.Type.GetType("System.String"));
-            var list = DICOMManager.shared.GetPatientInformation();
+            var list = DICOMManager.shared.GetPatientTag();
             foreach (var item in list)
             {
                 table.Rows.Add(item.TagName, item.TagDescription, item.TagValue);
             }
-            dataGridViewPatientInfo.DataSource = table;
-            dataGridViewPatientInfo.Columns[0].Visible = false;
+            dataGridViewPatientTag.DataSource = table;
+            dataGridViewPatientTag.Columns[0].Visible = false;
+        }
+
+        private void FillAllTagToGridView()
+        {
+            DataTable table = new DataTable();
+            table.Columns.Add("TagName", System.Type.GetType("System.String"));
+            table.Columns.Add("TagDes", System.Type.GetType("System.String"));
+            table.Columns.Add("TagValue", System.Type.GetType("System.String"));
+            var list = DICOMManager.shared.GetAllTag();
+            foreach (var item in list)
+            {
+                table.Rows.Add(item.TagName, item.TagDescription, item.TagValue);
+            }
+            dataGridViewAllTag.DataSource = table;
+            dataGridViewAllTag.Columns[0].Visible = false;
         }
 
         private void tbFrame_KeyDown(object sender, KeyEventArgs e)
@@ -122,7 +134,7 @@ namespace ReadApp
             {
                 currentFrame = Int32.Parse(tbFrame.Text)%currentCount;
                 pause();
-                pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+                pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
             }
         }
 

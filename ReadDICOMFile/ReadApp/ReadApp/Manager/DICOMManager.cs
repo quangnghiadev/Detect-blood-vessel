@@ -44,7 +44,7 @@ namespace ReadApp.Manager
             }
             for (int i = 0; i < image.NumberOfFrames; i++)
             {
-                var filePath = folderPath + fileName + "_" + i + "." + format.ToString();
+                var filePath = folderPath + i + "." + format.ToString();
                 ExportFrame(i, format, filePath);
             }
         }
@@ -56,7 +56,7 @@ namespace ReadApp.Manager
 
         }
 
-        public List<DICOMInfo> GetPatientInformation()
+        public List<DICOMInfo> GetPatientTag()
         {
             var listInfo = new List<DICOMInfo>();
             //Patient
@@ -85,11 +85,21 @@ namespace ReadApp.Manager
 
         public List<DICOMInfo> GetAllTag()
         {
-            var listInfo = new List<DICOMInfo>();
+            var listDICOMInfo = new List<DICOMInfo>();
 
-
-
-            return listInfo;
+            List<DicomItem> listDICOMItem = image.Dataset.ToList();
+            foreach (var item in listDICOMItem)
+            {
+                try
+                {
+                    listDICOMInfo.Add(new DICOMInfo(item.Tag.ToString(), item.Tag.DictionaryEntry.Name, image.Dataset.Get<string>(item.Tag)));
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+            return listDICOMInfo.OrderBy(item => item.TagDescription).ToList();
         }
 
 
