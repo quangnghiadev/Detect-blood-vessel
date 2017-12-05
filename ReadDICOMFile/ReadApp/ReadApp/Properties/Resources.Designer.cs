@@ -65,7 +65,7 @@ namespace ReadApp.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap left_arrow {
             get {
-                object obj = ResourceManager.GetObject("left-arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("left_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -85,7 +85,7 @@ namespace ReadApp.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap play_button {
             get {
-                object obj = ResourceManager.GetObject("play-button", resourceCulture);
+                object obj = ResourceManager.GetObject("play_button", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -95,7 +95,7 @@ namespace ReadApp.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap right_arrow {
             get {
-                object obj = ResourceManager.GetObject("right-arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("right_arrow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

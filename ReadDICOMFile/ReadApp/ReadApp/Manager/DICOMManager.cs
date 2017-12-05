@@ -7,6 +7,8 @@ using Dicom.Imaging;
 using System.Drawing.Imaging;
 using Dicom;
 using ReadApp.Model;
+using System.Windows.Forms;
+using System.IO;
 
 namespace ReadApp.Manager
 {
@@ -28,7 +30,7 @@ namespace ReadApp.Manager
 
         public void ExportFrame(int frameNumber, ImageFormat format, string filePath)
         {
-            if (frameNumber > 0 && frameNumber <= image.NumberOfFrames)
+            if (frameNumber >= 0 && frameNumber <= image.NumberOfFrames)
             {
                 image.RenderImage(frameNumber).AsBitmap().Save(filePath, format);
             }
@@ -36,15 +38,22 @@ namespace ReadApp.Manager
 
         public void ExportAllFrame(ImageFormat format, string folderPath)
         {
-            if (!System.IO.Directory.Exists(folderPath))
+            if (!Directory.Exists(folderPath))
             {
-                System.IO.Directory.CreateDirectory(folderPath);
+                Directory.CreateDirectory(folderPath);
             }
-            for (int i = 1; i <= image.NumberOfFrames; i++)
+            for (int i = 0; i < image.NumberOfFrames; i++)
             {
-                var filePath = folderPath + fileName + "_" + i + format.ToString();
-                ExportFrame(i, format, folderPath);
+                var filePath = folderPath + fileName + "_" + i + "." + format.ToString();
+                ExportFrame(i, format, filePath);
             }
+        }
+
+        public void ExportAllFrameToTempFolder()
+        {
+            var folderPath = Application.StartupPath + "\\data\\" + fileName + "\\";
+            ExportAllFrame(ImageFormat.Tiff, folderPath);
+
         }
 
         public List<DICOMInfo> GetPatientInformation()
