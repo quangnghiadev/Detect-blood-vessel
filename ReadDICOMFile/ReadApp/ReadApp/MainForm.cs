@@ -1,24 +1,18 @@
 ﻿using System.Windows.Forms;
-using Dicom;
-using Dicom.Imaging;
-using System.Drawing.Imaging;
 using ReadApp.Manager;
 using System.Data;
-
-
-
-using System.Drawing.Imaging;
 using System;
 using System.IO;
-
+using System.Windows.Forms;
 using System.Linq;
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ReadApp
 {
     public partial class MainForm : Form
     {
-        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        static Timer myTimer = new System.Windows.Forms.Timer();
         int i = 1;
         String dataPath = Application.StartupPath + "\\data\\";
         int currentIndex = 86698558;
@@ -26,13 +20,13 @@ namespace ReadApp
         public MainForm()
         {
             InitializeComponent();
-            currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*.jpg", SearchOption.AllDirectories)
-                            select file).Count();
-            myTimer.Tick += new EventHandler(TimerEventProcessor);
+            //currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*.jpg", SearchOption.AllDirectories)
+            //                select file).Count();
+            //myTimer.Tick += new EventHandler(TimerEventProcessor);
 
-            // Sets the timer interval to 5 seconds.
-            myTimer.Interval = 80;
-            myTimer.Start();
+            //// Sets the timer interval to 5 seconds.
+            //myTimer.Interval = 80;
+            //myTimer.Start();
         }
 
         private void TimerEventProcessor(Object myObject,
@@ -98,6 +92,7 @@ namespace ReadApp
             {
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
                 FillPatientInformationGridView();
+                DICOMManager.shared.ExportAllFrameToTempFolder();
             }
         }
 
