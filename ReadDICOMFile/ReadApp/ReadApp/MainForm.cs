@@ -19,7 +19,7 @@ namespace ReadApp
     public partial class MainForm : Form
     {
         static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
-        int i = 1;
+        int currentFrame = 1;
         String dataPath = Application.StartupPath + "\\data\\";
         int currentIndex = 86698558;
         int currentCount;
@@ -43,9 +43,9 @@ namespace ReadApp
 
             // Displays a message box asking whether to continue running the timer.
             myTimer.Enabled = true;
-            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
-            tbFrame.Text = (i%currentCount).ToString();
-            i += 1;
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
+            tbFrame.Text = (currentFrame % currentCount).ToString();
+            currentFrame += 1;
         }
 
         private string getFullPath()
@@ -61,30 +61,30 @@ namespace ReadApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            i = 0;
+            currentFrame = 0;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            i += 1;
+            currentFrame += 1;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            i -= 1;
+            currentFrame -= 1;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
         }
 
         private void pause()
         {
             myTimer.Enabled = false;
             btnPlay.Image = Properties.Resources.play_button;
-            tbFrame.Text = (i % currentCount).ToString();
+            tbFrame.Text = (currentFrame % currentCount).ToString();
         }
 
         private void MainForm_Load(object sender, System.EventArgs e)
@@ -120,9 +120,9 @@ namespace ReadApp
         {
             if (e.KeyCode == Keys.Enter)
             {
-                i = Int32.Parse(tbFrame.Text)%currentCount;
+                currentFrame = Int32.Parse(tbFrame.Text)%currentCount;
                 pause();
-                pictureBox1.Image = Image.FromFile(getFullPath() + i % currentCount + ".jpg");
+                pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + ".jpg");
             }
         }
 
