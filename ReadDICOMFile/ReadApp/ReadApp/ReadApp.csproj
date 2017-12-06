@@ -102,9 +102,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\data\86698558_frame49.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\toggle_expand.png" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\data\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\fo-dicom.Desktop.3.0.2\build\net452\fo-dicom.Desktop.targets" Condition="Exists('..\packages\fo-dicom.Desktop.3.0.2\build\net452\fo-dicom.Desktop.targets')" />

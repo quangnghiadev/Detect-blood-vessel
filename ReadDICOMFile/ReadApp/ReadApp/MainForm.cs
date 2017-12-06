@@ -11,40 +11,49 @@ namespace ReadApp
 {
     public partial class MainForm : Form
     {
-        static Timer myTimer = new Timer();
-        int currentFrame = 1;
-        string defaultImageFormat = "." + ImageFormat.Tiff.ToString();
-        String dataPath = Application.StartupPath + "\\data\\";
-        int currentIndex = 86698558;
-        int currentCount;
+        private Timer myTimer = new Timer();
+        private int currentFrame;
+        private string defaultImageFormat = "." + ImageFormat.Tiff.ToString();
+        private int totalFrame;
         public MainForm()
         {
             InitializeComponent();
-            currentCount = (from file in Directory.EnumerateFiles(getFullPath(), "*" + defaultImageFormat, SearchOption.AllDirectories)
-                            select file).Count();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
+        }
 
+        #region Media Player
+
+        private string getTempFolderPath()
+        {
+            return Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\";
+        }
+
+        private void InitMediaPlayer()
+        {
+            currentFrame = 1;
+            totalFrame = DICOMManager.shared.getNumberOfFrame();
+            tbFrame.Text = currentFrame.ToString();
+            labelTotalFame.Text = "/" + totalFrame;
+            myTimer.Stop();
+            //totalFrame = (from file in Directory.EnumerateFiles(getTempFolderPath(), "*" + defaultImageFormat, SearchOption.AllDirectories)
+            //                select file).Count();
             // Sets the timer interval to 5 seconds.
+            
             myTimer.Interval = 80;
             myTimer.Start();
+            myTimer.Enabled = false;
+            pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
-        private void TimerEventProcessor(Object myObject,
-                                              EventArgs myEventArgs)
+        private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
         {
-
             myTimer.Stop();
-
             // Displays a message box asking whether to continue running the timer.
             myTimer.Enabled = true;
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
-            tbFrame.Text = (currentFrame % currentCount).ToString();
+            pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            tbFrame.Text = currentFrame.ToString();
             currentFrame += 1;
-        }
-
-        private string getFullPath()
-        {
-            return dataPath + currentIndex + "\\";
+            currentFrame = currentFrame > totalFrame ? 1 : currentFrame;
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -55,31 +64,88 @@ namespace ReadApp
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            currentFrame = 0;
+            currentFrame = 1;
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
+            pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            currentFrame += 1;
+            if (currentFrame == totalFrame)
+            {
+                currentFrame = 1;
+            }
+            else
+            {
+                currentFrame += 1;
+            }
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
+            pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            currentFrame -= 1;
+            if (currentFrame == 1)
+            {
+                currentFrame = totalFrame;
+            } else
+            {
+                currentFrame -= 1;
+            }
+            
             pause();
-            pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
+            pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void pause()
         {
             myTimer.Enabled = false;
             btnPlay.Image = Properties.Resources.play_button;
-            tbFrame.Text = (currentFrame % currentCount).ToString();
+            tbFrame.Text = currentFrame.ToString();
         }
+
+        private void tbFrame_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                currentFrame = Int32.Parse(tbFrame.Text);
+                if (currentFrame == 0)
+                {
+                    currentFrame = 1;
+                }
+                else if (currentFrame > totalFrame)
+                {
+                    currentFrame = totalFrame;
+                }
+                pause();
+                pictureBox1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            }
+        }
+
+        private void tbFrame_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbFrame_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private Image LoadImageFromPath(string path)
+        {
+            Image img;
+            using (var bmpTemp = new Bitmap(path))
+            {
+                img = new Bitmap(bmpTemp);
+            }
+            return img;
+        }
+
+        #endregion
 
         private void MainForm_Load(object sender, System.EventArgs e)
         {
@@ -92,9 +158,9 @@ namespace ReadApp
             {
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
                 FillPatientTagToGridView();
-                DICOMManager.shared.GetAllTag();
                 FillAllTagToGridView();
                 DICOMManager.shared.ExportAllFrameToTempFolder();
+                InitMediaPlayer();
             }
         }
 
@@ -128,27 +194,6 @@ namespace ReadApp
             dataGridViewAllTag.Columns[0].Visible = false;
         }
 
-        private void tbFrame_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                currentFrame = Int32.Parse(tbFrame.Text)%currentCount;
-                pause();
-                pictureBox1.Image = Image.FromFile(getFullPath() + currentFrame % currentCount + defaultImageFormat);
-            }
-        }
-
-        private void tbFrame_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void tbFrame_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
+        
     }
 }

@@ -22,6 +22,14 @@ namespace ReadApp.Manager
 
         }
 
+        public String FileName
+        {
+            get
+            {
+                return fileName;
+            }
+        }
+
         public void Read(string filePath, string fileName)
         {
             this.image = new DicomImage(filePath);
@@ -32,7 +40,16 @@ namespace ReadApp.Manager
         {
             if (frameNumber >= 0 && frameNumber <= image.NumberOfFrames)
             {
-                image.RenderImage(frameNumber).AsBitmap().Save(filePath, format);
+                var thumbBMP = image.RenderImage(frameNumber).AsBitmap();
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
+                    {
+                        thumbBMP.Save(memory, format);
+                        byte[] bytes = memory.ToArray();
+                        fs.Write(bytes, 0, bytes.Length);
+                    }
+                }
             }
         }
 
@@ -44,7 +61,7 @@ namespace ReadApp.Manager
             }
             for (int i = 0; i < image.NumberOfFrames; i++)
             {
-                var filePath = folderPath + i + "." + format.ToString();
+                var filePath = folderPath + (i + 1) + "." + format.ToString();
                 ExportFrame(i, format, filePath);
             }
         }
@@ -52,6 +69,13 @@ namespace ReadApp.Manager
         public void ExportAllFrameToTempFolder()
         {
             var folderPath = Application.StartupPath + "\\data\\" + fileName + "\\";
+
+            //if (Directory.Exists(folderPath))
+            //{
+            //    GC.Collect();
+            //    GC.WaitForPendingFinalizers();
+            //    Directory.Delete(folderPath, true);
+            //}
             ExportAllFrame(ImageFormat.Tiff, folderPath);
 
         }
@@ -59,27 +83,39 @@ namespace ReadApp.Manager
         public List<DICOMInfo> GetPatientTag()
         {
             var listInfo = new List<DICOMInfo>();
-            //Patient
-            listInfo.Add(new DICOMInfo(DicomTag.PatientName.ToString(), "Patient Name", image.Dataset.Get<string>(DicomTag.PatientName)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientID.ToString(), "Patient ID", image.Dataset.Get<string>(DicomTag.PatientID)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientBirthDate.ToString(), "Patient Birth Date", image.Dataset.Get<string>(DicomTag.PatientBirthDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientSex.ToString(), "Patient Sex", image.Dataset.Get<string>(DicomTag.PatientSex)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientAge.ToString(), "Patient Age", image.Dataset.Get<string>(DicomTag.PatientAge)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientWeight.ToString(), "Patient Weight", image.Dataset.Get<string>(DicomTag.PatientWeight)));
-            listInfo.Add(new DICOMInfo(DicomTag.PatientAddress.ToString(), "Patient Address", image.Dataset.Get<string>(DicomTag.PatientAddress)));
-            listInfo.Add(new DICOMInfo());
-            //Study
-            listInfo.Add(new DICOMInfo(DicomTag.StudyDate.ToString(), "Study Date", image.Dataset.Get<string>(DicomTag.StudyDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyTime.ToString(), "Study Time", image.Dataset.Get<string>(DicomTag.StudyTime)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyID.ToString(), "Study ID", image.Dataset.Get<string>(DicomTag.StudyID)));
-            listInfo.Add(new DICOMInfo(DicomTag.Modality.ToString(), "Study Modality", image.Dataset.Get<string>(DicomTag.Modality)));
-            listInfo.Add(new DICOMInfo(DicomTag.StudyDescription.ToString(), "Study Description", image.Dataset.Get<string>(DicomTag.StudyDescription)));
-            listInfo.Add(new DICOMInfo());
-            //Series
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesDate.ToString(), "Series Date", image.Dataset.Get<string>(DicomTag.SeriesDate)));
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesTime.ToString(), "Series Time", image.Dataset.Get<string>(DicomTag.SeriesTime)));
-            listInfo.Add(new DICOMInfo(DicomTag.SeriesDescription.ToString(), "Series Description", image.Dataset.Get<string>(DicomTag.SeriesDescription)));
+            var listPatientTag = new List<DicomTag>();
+            listPatientTag.Add(DicomTag.PatientName);
+            listPatientTag.Add(DicomTag.PatientID);
+            listPatientTag.Add(DicomTag.PatientBirthDate);
+            listPatientTag.Add(DicomTag.PatientSex);
+            listPatientTag.Add(DicomTag.PatientAge);
+            listPatientTag.Add(DicomTag.PatientWeight);
+            listPatientTag.Add(DicomTag.PatientAddress);
+            listPatientTag.Add(DicomTag.StudyDate);
+            listPatientTag.Add(DicomTag.StudyTime);
+            listPatientTag.Add(DicomTag.StudyID);
+            listPatientTag.Add(DicomTag.Modality);
+            listPatientTag.Add(DicomTag.StudyDescription);
+            listPatientTag.Add(DicomTag.SeriesDate);
+            listPatientTag.Add(DicomTag.SeriesTime);
+            listPatientTag.Add(DicomTag.SeriesDescription);
 
+            for (int i = 0; i < 15; i++)
+            {
+                var item = listPatientTag[i];
+                try
+                {
+                    listInfo.Add(new DICOMInfo(item.ToString(), item.DictionaryEntry.Name, image.Dataset.Get<string>(item)));
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error when read Tag:" + item.DictionaryEntry.Name);
+                }
+                if (i == 6 || i == 11)
+                {
+                    listInfo.Add(new DICOMInfo());
+                }
+            }
             return listInfo;
         }
 
@@ -96,12 +132,15 @@ namespace ReadApp.Manager
                 }
                 catch (Exception)
                 {
-                    
+                    Console.WriteLine("Error when read Tag: " + item.Tag.DictionaryEntry.Name);
                 }
             }
             return listDICOMInfo.OrderBy(item => item.TagDescription).ToList();
         }
 
-
+        public int getNumberOfFrame()
+        {
+            return image.NumberOfFrames;
+        }
     }
 }
