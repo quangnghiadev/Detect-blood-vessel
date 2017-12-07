@@ -120,30 +120,6 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="button3.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAP+SURBVFhHxZdLTxRBFIVhY9yxgsREl8a1EQZhdIGI
-        boxLf4WJicZEEXTh6y+4UjdqYlwhGB873SgiMDyG4TEDKshLRBHfj/J83V1Nz0w1zGIMlRxS1L33nFPV
-        t7unK4wxmwr/jz8qG07e3NnYfn8o0dZlas91mtrWMkFccMKNBlq+pEZgoDJx/NqulsuPzbPMvJb+z4Ab
-        DbTQRNga2JJs60g/HfHF33wxJve5vICTgQZaaCJsDVTV64gYr1eNmfhkTHYD5FaMmQzA3JUTBZxwM9BC
-        E2FroLpO14kxITKS18OkdjTzzZiFXz6Ys+bKzYO4GWihibA1UGMNjCtx/GM8IJr+aszpOymz52yHB+as
-        EXPVhFCcERioQbjIwJiSxpQcB3Yx99OYWgk3XXzogTlrxFw1IdYzkAgMjCpxdDke7AKx+rZOc1AdDZiz
-        RsxVE0LcDLTQRLjIQEZJGSXHgV3MSmyvRLmlAHPWiLlqQpRiYESJIx/iwS7e/Sg2wBoxV00IcTPcBkTy
-        V/+klZRWMqDAO5EIOGZ22xAxwJw1YoX5cFg+uNFAC02E8wz81j/DShxeUrGSvQeIunv6+xpmtFOFzL4L
-        D0zLFRkQmLNGLJpLLRxwwQk3GrEGtAnfgJBV4anbKT3LO7wjtmho7/QEmy89MoeuPvHAnDVi0Vxq4YDL
-        8qLhNEAny7QZwqkwpUenvdXodHvcHrRrhA8HYO6dRiSHGnuLwgUn3GighSbCeQZWdYEGSZTTyYiBKLGH
-        EgwAawAuOOFGI9bAyh9jBt77GFVDndQTri64BDSaBx3zfsclYI2YzaOGWjjgsrxoxBpYVoeklNS/6LvN
-        qDCrF0iOZgowpef+vEgQ9HYtMGeNWDSXWjjgghNuNGINLKlDSOxb8GGLouA6cqTs1h41c++YFSvML+RD
-        w2mAI1vUbdSnpF4lx6FfpBPaWaEB1oi5aizgRgMtNBHOMzCnFiXxlX6XxAGScd1WhQZYI+aqsYAbjVgD
-        vNc3IgkNKN++jJiXYoA4GrEG3qpxepXYMxcP4nR1Qh1+QLcZYM5aKbVoOA2wiykFcfpSyXHoUXxQ9/SJ
-        WylPGDBnjZirxgJuNNBCE+E1A7qOOXUyTrtn1wdEA+r4tF42gDlrrtwo4EYDLTQRDg00nu/y7t0eNcoL
-        JW+EbnbFjhHW3JVTCLjRQAtNhK2B6mTrveyN5/NmSG8ujhLScgJOuNFAC02ErYGq7YkjR3mqXVdCRh2d
-        1u+7tBqrLBAXnHCjgRaaCFsDfCTs2La75VjyzN2ppI6oUdeJa1UOwAUn3GigFWiGBvhM2ioQqBOahOYy
-        A0640UAr79OMwQKuOBquD01STsAJNxpFH6ebNCoq/gFSXAXrZSz/kAAAAABJRU5ErkJggg==
-</value>
-  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>

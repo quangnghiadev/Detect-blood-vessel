@@ -9,6 +9,7 @@ using Dicom;
 using ReadApp.Model;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing;
 
 namespace ReadApp.Manager
 {
@@ -40,16 +41,19 @@ namespace ReadApp.Manager
         {
             if (frameNumber >= 0 && frameNumber <= image.NumberOfFrames)
             {
-                var thumbBMP = image.RenderImage(frameNumber).AsBitmap();
-                using (MemoryStream memory = new MemoryStream())
+                using (Bitmap thumbBMP = image.RenderImage(frameNumber).AsBitmap())
                 {
-                    using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
+                    using (MemoryStream memory = new MemoryStream())
                     {
-                        thumbBMP.Save(memory, format);
-                        byte[] bytes = memory.ToArray();
-                        fs.Write(bytes, 0, bytes.Length);
+                        using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite))
+                        {
+                            thumbBMP.Save(memory, format);
+                            byte[] bytes = memory.ToArray();
+                            fs.Write(bytes, 0, bytes.Length);
+                        }
                     }
                 }
+                
             }
         }
 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +45,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.imagePanel1 = new YLScsImage.ImagePanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridViewPatientTag = new System.Windows.Forms.DataGridView();
@@ -54,12 +53,14 @@
             this.dataGridViewAllTag = new System.Windows.Forms.DataGridView();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelFilePath = new System.Windows.Forms.Label();
+            this.labelZoom = new System.Windows.Forms.Label();
+            this.buttonZoomIn = new System.Windows.Forms.Button();
+            this.buttonZoomOut = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -71,7 +72,6 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientTag)).BeginInit();
@@ -234,7 +234,7 @@
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1255, 583);
-            this.splitContainer1.SplitterDistance = 254;
+            this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -243,7 +243,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(254, 583);
+            this.treeView1.Size = new System.Drawing.Size(250, 583);
             this.treeView1.TabIndex = 0;
             this.treeView1.Visible = false;
             // 
@@ -257,28 +257,30 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.splitContainer2.Panel1.Controls.Add(this.pictureBox1);
+            this.splitContainer2.Panel1.Controls.Add(this.imagePanel1);
             this.splitContainer2.Panel1MinSize = 512;
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer2.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer2.Panel2MinSize = 250;
-            this.splitContainer2.Size = new System.Drawing.Size(999, 583);
-            this.splitContainer2.SplitterDistance = 737;
+            this.splitContainer2.Panel2MinSize = 300;
+            this.splitContainer2.Size = new System.Drawing.Size(1003, 583);
+            this.splitContainer2.SplitterDistance = 682;
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 0;
             // 
-            // pictureBox1
+            // imagePanel1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(737, 583);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.imagePanel1.CanvasSize = new System.Drawing.Size(60, 40);
+            this.imagePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imagePanel1.Image = null;
+            this.imagePanel1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.imagePanel1.Location = new System.Drawing.Point(0, 0);
+            this.imagePanel1.Name = "imagePanel1";
+            this.imagePanel1.Size = new System.Drawing.Size(682, 583);
+            this.imagePanel1.TabIndex = 0;
+            this.imagePanel1.Zoom = 1F;
             // 
             // tabControl1
             // 
@@ -288,7 +290,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(260, 583);
+            this.tabControl1.Size = new System.Drawing.Size(319, 583);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -297,7 +299,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(252, 557);
+            this.tabPage1.Size = new System.Drawing.Size(311, 557);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Patient Information";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -314,7 +316,7 @@
             this.dataGridViewPatientTag.Name = "dataGridViewPatientTag";
             this.dataGridViewPatientTag.ReadOnly = true;
             this.dataGridViewPatientTag.RowHeadersVisible = false;
-            this.dataGridViewPatientTag.Size = new System.Drawing.Size(246, 551);
+            this.dataGridViewPatientTag.Size = new System.Drawing.Size(305, 551);
             this.dataGridViewPatientTag.TabIndex = 0;
             // 
             // tabPage2
@@ -323,7 +325,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(252, 557);
+            this.tabPage2.Size = new System.Drawing.Size(311, 557);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "All Tags";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -340,13 +342,13 @@
             this.dataGridViewAllTag.Name = "dataGridViewAllTag";
             this.dataGridViewAllTag.ReadOnly = true;
             this.dataGridViewAllTag.RowHeadersVisible = false;
-            this.dataGridViewAllTag.Size = new System.Drawing.Size(246, 551);
+            this.dataGridViewAllTag.Size = new System.Drawing.Size(305, 551);
             this.dataGridViewAllTag.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(73, 12);
+            this.label4.Location = new System.Drawing.Point(73, 14);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(48, 13);
             this.label4.TabIndex = 9;
@@ -361,68 +363,93 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Frame size:";
             // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Fit",
-            "400%",
-            "200%",
-            "100%",
-            "66%",
-            "50%",
-            "33%"});
-            this.comboBox1.Location = new System.Drawing.Point(1012, 8);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(75, 21);
-            this.comboBox1.TabIndex = 1;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button3.BackgroundImage")));
-            this.button3.Location = new System.Drawing.Point(1093, 7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 6;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.BackgroundImage = global::ReadApp.Properties.Resources.toggle_expand;
-            this.button2.Location = new System.Drawing.Point(1225, 7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(20, 20);
-            this.button2.TabIndex = 5;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // trackBar1
             // 
             this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.trackBar1.Location = new System.Drawing.Point(1119, 7);
+            this.trackBar1.Maximum = 30;
+            this.trackBar1.Minimum = 5;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(104, 45);
             this.trackBar1.TabIndex = 4;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.trackBar1.Value = 5;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.labelFilePath);
+            this.panel2.Controls.Add(this.labelZoom);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
-            this.panel2.Controls.Add(this.comboBox1);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.buttonZoomIn);
+            this.panel2.Controls.Add(this.buttonZoomOut);
             this.panel2.Controls.Add(this.trackBar1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(0, 652);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1255, 35);
             this.panel2.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(228, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "512x512";
+            // 
+            // labelFilePath
+            // 
+            this.labelFilePath.AutoSize = true;
+            this.labelFilePath.Location = new System.Drawing.Point(170, 14);
+            this.labelFilePath.Name = "labelFilePath";
+            this.labelFilePath.Size = new System.Drawing.Size(50, 13);
+            this.labelFilePath.TabIndex = 11;
+            this.labelFilePath.Text = "File path:";
+            // 
+            // labelZoom
+            // 
+            this.labelZoom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelZoom.AutoSize = true;
+            this.labelZoom.Location = new System.Drawing.Point(1052, 12);
+            this.labelZoom.Name = "labelZoom";
+            this.labelZoom.Size = new System.Drawing.Size(33, 13);
+            this.labelZoom.TabIndex = 10;
+            this.labelZoom.Text = "100%";
+            // 
+            // buttonZoomIn
+            // 
+            this.buttonZoomIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonZoomIn.BackColor = System.Drawing.Color.Transparent;
+            this.buttonZoomIn.FlatAppearance.BorderSize = 0;
+            this.buttonZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZoomIn.Image = global::ReadApp.Properties.Resources.ZoomIn_16x16;
+            this.buttonZoomIn.Location = new System.Drawing.Point(1094, 5);
+            this.buttonZoomIn.Name = "buttonZoomIn";
+            this.buttonZoomIn.Size = new System.Drawing.Size(25, 25);
+            this.buttonZoomIn.TabIndex = 6;
+            this.buttonZoomIn.UseVisualStyleBackColor = false;
+            this.buttonZoomIn.Click += new System.EventHandler(this.buttonZoomIn_Click);
+            // 
+            // buttonZoomOut
+            // 
+            this.buttonZoomOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonZoomOut.BackColor = System.Drawing.Color.Transparent;
+            this.buttonZoomOut.FlatAppearance.BorderSize = 0;
+            this.buttonZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZoomOut.Image = global::ReadApp.Properties.Resources.ZoomOut_16x16;
+            this.buttonZoomOut.Location = new System.Drawing.Point(1223, 6);
+            this.buttonZoomOut.Name = "buttonZoomOut";
+            this.buttonZoomOut.Size = new System.Drawing.Size(25, 25);
+            this.buttonZoomOut.TabIndex = 5;
+            this.buttonZoomOut.UseVisualStyleBackColor = false;
+            this.buttonZoomOut.Click += new System.EventHandler(this.buttonZoomOut_Click);
             // 
             // label2
             // 
@@ -445,7 +472,9 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1200, 600);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DICOM Viewer";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -459,7 +488,6 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPatientTag)).EndInit();
@@ -485,14 +513,12 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button buttonZoomOut;
+        private System.Windows.Forms.Button buttonZoomIn;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelTotalFame;
@@ -507,5 +533,9 @@
         private System.Windows.Forms.DataGridView dataGridViewAllTag;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private YLScsImage.ImagePanel imagePanel1;
+        private System.Windows.Forms.Label labelZoom;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelFilePath;
     }
 }
