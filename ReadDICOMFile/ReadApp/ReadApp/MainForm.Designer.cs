@@ -45,7 +45,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.imagePanel1 = new YLScsImage.ImagePanel();
+            this.pictureBoxMain = new YLScsImage.ImagePanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dataGridViewPatientTag = new System.Windows.Forms.DataGridView();
@@ -257,7 +257,7 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.splitContainer2.Panel1.Controls.Add(this.imagePanel1);
+            this.splitContainer2.Panel1.Controls.Add(this.pictureBoxMain);
             this.splitContainer2.Panel1MinSize = 512;
             // 
             // splitContainer2.Panel2
@@ -270,17 +270,17 @@
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 0;
             // 
-            // imagePanel1
+            // pictureBoxMain
             // 
-            this.imagePanel1.CanvasSize = new System.Drawing.Size(60, 40);
-            this.imagePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imagePanel1.Image = null;
-            this.imagePanel1.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.imagePanel1.Location = new System.Drawing.Point(0, 0);
-            this.imagePanel1.Name = "imagePanel1";
-            this.imagePanel1.Size = new System.Drawing.Size(682, 583);
-            this.imagePanel1.TabIndex = 0;
-            this.imagePanel1.Zoom = 1F;
+            this.pictureBoxMain.CanvasSize = new System.Drawing.Size(60, 40);
+            this.pictureBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxMain.Image = null;
+            this.pictureBoxMain.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.pictureBoxMain.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMain.Name = "pictureBoxMain";
+            this.pictureBoxMain.Size = new System.Drawing.Size(682, 583);
+            this.pictureBoxMain.TabIndex = 0;
+            this.pictureBoxMain.Zoom = 1F;
             // 
             // tabControl1
             // 
@@ -533,7 +533,7 @@
         private System.Windows.Forms.DataGridView dataGridViewAllTag;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
-        private YLScsImage.ImagePanel imagePanel1;
+        private YLScsImage.ImagePanel pictureBoxMain;
         private System.Windows.Forms.Label labelZoom;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelFilePath;

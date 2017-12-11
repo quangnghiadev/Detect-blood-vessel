@@ -193,8 +193,13 @@ namespace YLScsImage
             // attainable by user interaction.
             this.vScrollBar1.Maximum += this.vScrollBar1.LargeChange;
 
-            this.vScrollBar1.Value = this.vScrollBar1.Maximum / 2;
-            this.hScrollBar1.Value = this.hScrollBar1.Maximum / 2;
+            if (vScrollBar1.Minimum < 0 || hScrollBar1.Minimum < 0)
+            {
+                return;
+            }
+
+            this.vScrollBar1.Value = (this.vScrollBar1.Maximum - vScrollBar1.Minimum) / 2;
+            this.hScrollBar1.Value = (this.hScrollBar1.Maximum - hScrollBar1.Minimum) / 2;
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)

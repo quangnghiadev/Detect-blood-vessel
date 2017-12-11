@@ -33,6 +33,7 @@ namespace ReadApp
             currentFrame = 1;
             trackBar1.Value = 10;
             totalFrame = DICOMManager.shared.getNumberOfFrame();
+            btnPlay.Image = Properties.Resources.play_button;
             tbFrame.Text = currentFrame.ToString();
             labelTotalFame.Text = "/" + totalFrame;
             myTimer.Stop();
@@ -43,7 +44,7 @@ namespace ReadApp
             myTimer.Interval = 80;
             myTimer.Start();
             myTimer.Enabled = false;
-            imagePanel1.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
@@ -51,7 +52,7 @@ namespace ReadApp
             myTimer.Stop();
             // Displays a message box asking whether to continue running the timer.
             myTimer.Enabled = true;
-            //pictureBoxMain.BackgroundImage = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
             tbFrame.Text = currentFrame.ToString();
             currentFrame += 1;
             currentFrame = currentFrame > totalFrame ? 1 : currentFrame;
@@ -67,7 +68,7 @@ namespace ReadApp
         {
             currentFrame = 1;
             pause();
-            //pictureBoxMain.BackgroundImage = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -81,7 +82,7 @@ namespace ReadApp
                 currentFrame += 1;
             }
             pause();
-            //pictureBoxMain.BackgroundImage = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
@@ -95,7 +96,7 @@ namespace ReadApp
             }
             
             pause();
-            //pictureBoxMain.BackgroundImage = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
         }
 
         private void pause()
@@ -119,7 +120,7 @@ namespace ReadApp
                     currentFrame = totalFrame;
                 }
                 pause();
-                //pictureBoxMain.BackgroundImage = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+                pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
             }
         }
 
@@ -197,7 +198,7 @@ namespace ReadApp
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            imagePanel1.Zoom = trackBar1.Value * 0.1f;
+            pictureBoxMain.Zoom = trackBar1.Value * 0.1f;
             labelZoom.Text = trackBar1.Value * 10 + "%";
         }
 
@@ -206,7 +207,7 @@ namespace ReadApp
             if (trackBar1.Value > trackBar1.Minimum)
             {
                 trackBar1.Value -= 1;
-                imagePanel1.Zoom = trackBar1.Value * 0.1f;
+                pictureBoxMain.Zoom = trackBar1.Value * 0.1f;
                 labelZoom.Text = trackBar1.Value * 10 + "%";
             }
         }
@@ -216,7 +217,7 @@ namespace ReadApp
             if (trackBar1.Value < trackBar1.Maximum)
             {
                 trackBar1.Value += 1;
-                imagePanel1.Zoom = trackBar1.Value * 0.1f;
+                pictureBoxMain.Zoom = trackBar1.Value * 0.1f;
                 labelZoom.Text = trackBar1.Value * 10 + "%";
             }
         }
