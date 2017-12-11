@@ -10,6 +10,7 @@ using ReadApp.Model;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
+using ImageMagick;
 
 namespace ReadApp.Manager
 {
@@ -29,6 +30,11 @@ namespace ReadApp.Manager
             {
                 return fileName;
             }
+        }
+
+        public int FrameCount()
+        {
+            return image.NumberOfFrames;
         }
 
         public void Read(string filePath, string fileName)
@@ -65,7 +71,7 @@ namespace ReadApp.Manager
             }
             for (int i = 0; i < image.NumberOfFrames; i++)
             {
-                var filePath = folderPath + (i + 1) + "." + format.ToString();
+                var filePath = folderPath + (i + 1) + GetFilenameExtension(format);
                 ExportFrame(i, format, filePath);
             }
         }
@@ -84,6 +90,62 @@ namespace ReadApp.Manager
 
         }
 
+        public void ExportGifFile(string filePath)
+        {
+            
+
+            using (MagickImageCollection collection = new MagickImageCollection())
+            {
+                using (Bitmap thumbBMP = image.RenderImage(0).AsBitmap())
+                {
+                    collection.Add(new MagickImage(thumbBMP));
+                    collection[0].AnimationDelay = 1;
+                }
+                for (int i = 1; i < image.NumberOfFrames; i++)
+                {
+                    using (Bitmap thumbBMP = image.RenderImage(i).AsBitmap())
+                    {
+                        collection.Add(new MagickImage(thumbBMP));
+                        collection[i].AnimationDelay = 1;
+                    }
+                }
+
+
+                // Optionally reduce colors
+                QuantizeSettings settings = new QuantizeSettings();
+                settings.Colors = 256;
+                collection.Quantize(settings);
+
+                // Optionally optimize the images (images should have the same size).
+                collection.Optimize();
+
+                // Save gif
+                collection.Write(filePath);
+            }
+        }
+
+        //public static string GetFilenameExtension(ImageFormat format)
+        //{
+        //    return ImageCodecInfo.GetImageEncoders().FirstOrDefault(x => x.FormatID == format.Guid).FilenameExtension;
+        //}
+
+        public static string GetFilenameExtension( ImageFormat format)
+        {
+            try
+            {
+                return ImageCodecInfo.GetImageEncoders()
+                        .First(x => x.FormatID == format.Guid)
+                        .FilenameExtension
+                        .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries)
+                        .First()
+                        .Trim('*')
+                        .ToLower();
+            }
+            catch (Exception)
+            {
+                return ".IDFK";
+            }
+        }
         public List<DICOMInfo> GetPatientTag()
         {
             var listInfo = new List<DICOMInfo>();
