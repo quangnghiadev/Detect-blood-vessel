@@ -21,21 +21,18 @@ namespace ReadApp.Manager
         private string fileName;
         private DICOMManager()
         {
-
+            
         }
 
-        public String FileName
-        {
-            get
-            {
-                return fileName;
-            }
-        }
+        public Double WindowWidth => image.WindowWidth;
 
-        public int FrameCount()
-        {
-            return image.NumberOfFrames;
-        }
+        public Double WindowCenter => image.WindowCenter;
+
+        public String FileName => fileName;
+
+        public int FrameCount => image.NumberOfFrames;
+
+        public Size FrameSize => new Size(image.Width, image.Height);
 
         public void Read(string filePath, string fileName)
         {

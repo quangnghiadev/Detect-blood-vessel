@@ -19,7 +19,7 @@ namespace ReadApp
         {
             InitializeComponent();
             cbOptions.SelectedIndex = 1;
-            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount() + 1).ToArray();
+            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount + 1).ToArray();
             cbFrame.DataSource = arr;
         }
 
@@ -28,11 +28,6 @@ namespace ReadApp
             InitializeComponent();
             cbOptions.SelectedIndex = 1;
             filePath = path;
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void label2_Click(object sender, EventArgs e)

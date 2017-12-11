@@ -63,9 +63,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap left_arrow {
+        internal static System.Drawing.Bitmap cog_start {
             get {
-                object obj = ResourceManager.GetObject("left_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("cog_start", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pause {
+        internal static System.Drawing.Bitmap ExportFile_16x16 {
             get {
-                object obj = ResourceManager.GetObject("pause", resourceCulture);
+                object obj = ResourceManager.GetObject("ExportFile_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap play_button {
+        internal static System.Drawing.Bitmap Next_16x16 {
             get {
-                object obj = ResourceManager.GetObject("play_button", resourceCulture);
+                object obj = ResourceManager.GetObject("Next_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap right_arrow {
+        internal static System.Drawing.Bitmap Open_16x16 {
             get {
-                object obj = ResourceManager.GetObject("right_arrow", resourceCulture);
+                object obj = ResourceManager.GetObject("Open_16x16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap stop {
+        internal static System.Drawing.Bitmap pause_blue {
             get {
-                object obj = ResourceManager.GetObject("stop", resourceCulture);
+                object obj = ResourceManager.GetObject("pause_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap toggle {
+        internal static System.Drawing.Bitmap play_blue {
             get {
-                object obj = ResourceManager.GetObject("toggle", resourceCulture);
+                object obj = ResourceManager.GetObject("play_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,19 @@ namespace ReadApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap toggle_expand {
+        internal static System.Drawing.Bitmap Prev_16x16 {
             get {
-                object obj = ResourceManager.GetObject("toggle_expand", resourceCulture);
+                object obj = ResourceManager.GetObject("Prev_16x16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stop_red {
+            get {
+                object obj = ResourceManager.GetObject("stop_red", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

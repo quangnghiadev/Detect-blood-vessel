@@ -19,6 +19,50 @@ namespace ReadApp
         {
             InitializeComponent();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
+            ConfigUI(false);
+        }
+
+        private void ConfigUI(bool isEnabled)
+        {
+            groupBoxImage.Enabled = 
+            groupBoxMediaPlayer.Enabled = 
+            groupBoxTool.Enabled = isEnabled;
+            exportToolStripMenuItem.Enabled = 
+            fitScreenToolStripMenuItem.Enabled =
+            vesselDetectToolStripMenuItem.Enabled =
+            compareToolStripMenuItem.Enabled = 
+            buttonExport.Enabled = 
+            labelSeriesDes.Enabled =
+            labelManufacturerModel.Enabled =
+            labelSeriesDate.Enabled =
+            labelSeriesTime.Enabled =
+            labelHopital.Enabled =
+            labelModality.Enabled =
+            labelSex.Enabled =
+            labelID.Enabled =
+            labelBirthDay.Enabled =
+            labelPatientName.Enabled =
+            labelWDCenter.Enabled =
+            labelWDWidth.Enabled = isEnabled;
+            if (isEnabled)
+            {
+                var frameSize = DICOMManager.shared.FrameSize;
+                labelFrameSize.Text = frameSize.Width + "x" + frameSize.Height;
+                labelFileName.Text = DICOMManager.shared.FileName;
+                //        labelSeriesDes.Text =
+                //labelManufacturerModel.Text =
+                //labelSeriesDate.Text =
+                //labelSeriesTime.Text =
+                //labelHopital.Text =
+                //labelModality.Text =
+                //labelSex.Text =
+                //labelID.Text =
+                //labelBirthDay.Text =
+                //labelPatientName.Text =
+                //labelWDCenter.Text =
+                //labelWDWidth.Text =
+            }
+            
         }
 
         #region Media Player
@@ -33,7 +77,7 @@ namespace ReadApp
             currentFrame = 1;
             trackBar1.Value = 10;
             totalFrame = DICOMManager.shared.getNumberOfFrame();
-            btnPlay.Image = Properties.Resources.play_button;
+            btnPlay.Image = Properties.Resources.play_blue;
             tbFrame.Text = currentFrame.ToString();
             labelTotalFame.Text = "/" + totalFrame;
             myTimer.Stop();
@@ -61,7 +105,7 @@ namespace ReadApp
         private void btnPlay_Click(object sender, EventArgs e)
         {
             myTimer.Enabled = !myTimer.Enabled;
-            btnPlay.Image = !myTimer.Enabled ? Properties.Resources.play_button : Properties.Resources.pause;
+            btnPlay.Image = !myTimer.Enabled ? Properties.Resources.play_blue : Properties.Resources.pause_blue;
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -102,7 +146,7 @@ namespace ReadApp
         private void pause()
         {
             myTimer.Enabled = false;
-            btnPlay.Image = Properties.Resources.play_button;
+            btnPlay.Image = Properties.Resources.play_blue;
             tbFrame.Text = currentFrame.ToString();
         }
 
@@ -159,11 +203,17 @@ namespace ReadApp
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
-                FillPatientTagToGridView();
-                FillAllTagToGridView();
+                FillDataToGridView();
                 DICOMManager.shared.ExportAllFrameToTempFolder();
                 InitMediaPlayer();
+                ConfigUI(true);
             }
+        }
+
+        private void FillDataToGridView()
+        {
+            FillPatientTagToGridView();
+            FillAllTagToGridView();
         }
 
         private void FillPatientTagToGridView()
@@ -220,6 +270,65 @@ namespace ReadApp
                 pictureBoxMain.Zoom = trackBar1.Value * 0.1f;
                 labelZoom.Text = trackBar1.Value * 10 + "%";
             }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            var exportDialog = new Export();
+            exportDialog.ShowDialog();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            buttonSave_Click(sender, e);
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            buttonOpen_Click(sender, e);
+        }
+
+        private void fitScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            trackBar1.Value = 10;
+            trackBar1_Scroll(sender, e);
+        }
+
+        private void numberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showOverlayToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            if (showOverlayToolStripMenuItem.Checked)
+            {
+                //show
+            }
+            else
+            {
+                //hide
+            }
+        }
+
+        private void vesselDetectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            detectVesselbutton_Click(sender, e);
+        }
+
+        private void detectVesselbutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void compareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //
         }
     }
 }

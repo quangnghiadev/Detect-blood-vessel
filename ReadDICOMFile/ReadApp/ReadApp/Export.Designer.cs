@@ -37,11 +37,12 @@
             // 
             // cbOptions
             // 
+            this.cbOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOptions.FormattingEnabled = true;
             this.cbOptions.Items.AddRange(new object[] {
-            "1 frame",
-            "all frame"});
-            this.cbOptions.Location = new System.Drawing.Point(112, 25);
+            "Frame",
+            "All frames"});
+            this.cbOptions.Location = new System.Drawing.Point(66, 6);
             this.cbOptions.Name = "cbOptions";
             this.cbOptions.Size = new System.Drawing.Size(121, 21);
             this.cbOptions.TabIndex = 0;
@@ -50,52 +51,58 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(37, 28);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Options";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(37, 74);
+            this.label3.Location = new System.Drawing.Point(12, 36);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 1;
             this.label3.Text = "Frame";
-            this.label3.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(112, 134);
+            this.btnExport.Image = global::ReadApp.Properties.Resources.ExportFile_16x16;
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExport.Location = new System.Drawing.Point(66, 60);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.Size = new System.Drawing.Size(60, 30);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Export";
+            this.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // cbFrame
             // 
+            this.cbFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbFrame.FormattingEnabled = true;
-            this.cbFrame.Location = new System.Drawing.Point(112, 74);
+            this.cbFrame.Location = new System.Drawing.Point(66, 33);
             this.cbFrame.Name = "cbFrame";
-            this.cbFrame.Size = new System.Drawing.Size(121, 21);
+            this.cbFrame.Size = new System.Drawing.Size(60, 21);
             this.cbFrame.TabIndex = 4;
             // 
             // Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 203);
+            this.ClientSize = new System.Drawing.Size(213, 94);
             this.Controls.Add(this.cbFrame);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbOptions);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Export";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Export";
             this.ResumeLayout(false);
             this.PerformLayout();
