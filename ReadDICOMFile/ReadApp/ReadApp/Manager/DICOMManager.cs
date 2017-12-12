@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing;
 using ImageMagick;
+using System.Globalization;
 
 namespace ReadApp.Manager
 {
@@ -172,7 +173,16 @@ namespace ReadApp.Manager
                 var item = listPatientTag[i];
                 try
                 {
-                    listInfo.Add(new DICOMInfo(item.ToString(), item.DictionaryEntry.Name, image.Dataset.Get<string>(item)));
+                    var value = image.Dataset.Get<string>(item);
+                    if (item.DictionaryEntry.Name.Contains("Time"))
+                    {
+                        value = ConvertStringTime(value);
+                    }
+                    else if (item.DictionaryEntry.Name.Contains("Date"))
+                    {
+                        value = ConvertStringDate(value);
+                    }
+                    listInfo.Add(new DICOMInfo(item.ToString(), item.DictionaryEntry.Name, value));
                 }
                 catch (Exception)
                 {
@@ -197,7 +207,16 @@ namespace ReadApp.Manager
             {
                 try
                 {
-                    listDICOMInfo.Add(new DICOMInfo(item.Tag.ToString(), item.Tag.DictionaryEntry.Name, image.Dataset.Get<string>(item.Tag)));
+                    var value = image.Dataset.Get<string>(item.Tag);
+                    if (item.Tag.DictionaryEntry.Name.Contains("Time"))
+                    {
+                        value = ConvertStringTime(value);
+                    }
+                    else if (item.Tag.DictionaryEntry.Name.Contains("Date"))
+                    {
+                        value = ConvertStringDate(value);
+                    }
+                    listDICOMInfo.Add(new DICOMInfo(item.Tag.ToString(), item.Tag.DictionaryEntry.Name, value));
                 }
                 catch (Exception)
                 {
@@ -224,6 +243,23 @@ namespace ReadApp.Manager
                 Console.WriteLine("Error when read Tag: " + tag.ToString());
             }
             return value;
+        }
+
+        private string ConvertStringDate(string date)
+        {
+            DateTime dateTime;
+            DateTime.TryParseExact(date, "yyyyMMdd",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
+            return dateTime.ToShortDateString();
+        }
+
+        private string ConvertStringTime(string time)
+        {
+            time = time.Split('.')[0];
+            DateTime dateTime;
+            DateTime.TryParseExact(time, "HHmmss",
+                CultureInfo.InvariantCulture, DateTimeStyles.None, out dateTime);
+            return dateTime.ToLongTimeString();
         }
     }
 }
