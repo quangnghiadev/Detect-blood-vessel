@@ -14,7 +14,7 @@ namespace ReadApp
     {
         private Timer myTimer = new Timer();
         private int currentFrame;
-        private string defaultImageFormat = "." + ImageFormat.Tiff.ToString();
+        private string defaultImageFormat = DICOMManager.GetFilenameExtension(ImageFormat.Tiff);
         private int totalFrame;
         public MainForm()
         {
