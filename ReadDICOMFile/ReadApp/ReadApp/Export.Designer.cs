@@ -37,6 +37,7 @@
             // 
             // cbOptions
             // 
+            this.cbOptions.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOptions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbOptions.FormattingEnabled = true;
             this.cbOptions.Items.AddRange(new object[] {
@@ -81,6 +82,7 @@
             // 
             // cbFrame
             // 
+            this.cbFrame.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbFrame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbFrame.FormattingEnabled = true;
             this.cbFrame.Location = new System.Drawing.Point(66, 33);
@@ -98,6 +100,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbOptions);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Export";

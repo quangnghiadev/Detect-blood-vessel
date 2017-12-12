@@ -34,7 +34,6 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fitScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showOverlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.numberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vesselDetectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,19 +71,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxTool = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.labelPatientName = new System.Windows.Forms.Label();
-            this.labelBirthDay = new System.Windows.Forms.Label();
-            this.labelID = new System.Windows.Forms.Label();
-            this.labelSex = new System.Windows.Forms.Label();
-            this.labelModality = new System.Windows.Forms.Label();
-            this.labelManufacturerModel = new System.Windows.Forms.Label();
-            this.labelSeriesDate = new System.Windows.Forms.Label();
-            this.labelSeriesTime = new System.Windows.Forms.Label();
-            this.labelHopital = new System.Windows.Forms.Label();
-            this.labelSeriesDes = new System.Windows.Forms.Label();
             this.pictureBoxMain = new YLScsImage.ImagePanel();
-            this.labelWDCenter = new System.Windows.Forms.Label();
-            this.labelWDWidth = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelFramePerSecond = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -138,7 +127,6 @@
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fitScreenToolStripMenuItem,
-            this.showOverlayToolStripMenuItem,
             this.numberToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -150,16 +138,6 @@
             this.fitScreenToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.fitScreenToolStripMenuItem.Text = "Fit Screen";
             this.fitScreenToolStripMenuItem.Click += new System.EventHandler(this.fitScreenToolStripMenuItem_Click);
-            // 
-            // showOverlayToolStripMenuItem
-            // 
-            this.showOverlayToolStripMenuItem.Checked = true;
-            this.showOverlayToolStripMenuItem.CheckOnClick = true;
-            this.showOverlayToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showOverlayToolStripMenuItem.Name = "showOverlayToolStripMenuItem";
-            this.showOverlayToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
-            this.showOverlayToolStripMenuItem.Text = "Show Overlay";
-            this.showOverlayToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showOverlayToolStripMenuItem_CheckedChanged);
             // 
             // numberToolStripMenuItem
             // 
@@ -381,19 +359,7 @@
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.AutoScrollMinSize = new System.Drawing.Size(600, 600);
-            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.MenuText;
-            this.splitContainer1.Panel1.Controls.Add(this.labelWDCenter);
-            this.splitContainer1.Panel1.Controls.Add(this.labelWDWidth);
-            this.splitContainer1.Panel1.Controls.Add(this.labelSeriesDes);
-            this.splitContainer1.Panel1.Controls.Add(this.labelManufacturerModel);
-            this.splitContainer1.Panel1.Controls.Add(this.labelSeriesDate);
-            this.splitContainer1.Panel1.Controls.Add(this.labelSeriesTime);
-            this.splitContainer1.Panel1.Controls.Add(this.labelHopital);
-            this.splitContainer1.Panel1.Controls.Add(this.labelModality);
-            this.splitContainer1.Panel1.Controls.Add(this.labelSex);
-            this.splitContainer1.Panel1.Controls.Add(this.labelID);
-            this.splitContainer1.Panel1.Controls.Add(this.labelBirthDay);
-            this.splitContainer1.Panel1.Controls.Add(this.labelPatientName);
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Black;
             this.splitContainer1.Panel1.Controls.Add(this.pictureBoxMain);
             this.splitContainer1.Panel1MinSize = 690;
             // 
@@ -401,7 +367,7 @@
             // 
             this.splitContainer1.Panel2.BackColor = System.Drawing.SystemColors.Window;
             this.splitContainer1.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer1.Panel2MinSize = 350;
+            this.splitContainer1.Panel2MinSize = 330;
             this.splitContainer1.Size = new System.Drawing.Size(1042, 661);
             this.splitContainer1.SplitterDistance = 690;
             this.splitContainer1.SplitterWidth = 2;
@@ -451,6 +417,8 @@
             // 
             // groupBoxMediaPlayer
             // 
+            this.groupBoxMediaPlayer.Controls.Add(this.labelFramePerSecond);
+            this.groupBoxMediaPlayer.Controls.Add(this.label2);
             this.groupBoxMediaPlayer.Controls.Add(this.btnNext);
             this.groupBoxMediaPlayer.Controls.Add(this.btnPlay);
             this.groupBoxMediaPlayer.Controls.Add(this.btnPrevious);
@@ -460,7 +428,7 @@
             this.groupBoxMediaPlayer.Controls.Add(this.label1);
             this.groupBoxMediaPlayer.Location = new System.Drawing.Point(20, 70);
             this.groupBoxMediaPlayer.Name = "groupBoxMediaPlayer";
-            this.groupBoxMediaPlayer.Size = new System.Drawing.Size(180, 88);
+            this.groupBoxMediaPlayer.Size = new System.Drawing.Size(180, 122);
             this.groupBoxMediaPlayer.TabIndex = 15;
             this.groupBoxMediaPlayer.TabStop = false;
             this.groupBoxMediaPlayer.Text = "Media Player";
@@ -524,7 +492,7 @@
             this.groupBoxImage.Controls.Add(this.label12);
             this.groupBoxImage.Controls.Add(this.label5);
             this.groupBoxImage.Controls.Add(this.labelFrameSize);
-            this.groupBoxImage.Location = new System.Drawing.Point(20, 164);
+            this.groupBoxImage.Location = new System.Drawing.Point(20, 198);
             this.groupBoxImage.Name = "groupBoxImage";
             this.groupBoxImage.Size = new System.Drawing.Size(180, 125);
             this.groupBoxImage.TabIndex = 16;
@@ -574,9 +542,9 @@
             // groupBoxTool
             // 
             this.groupBoxTool.Controls.Add(this.button1);
-            this.groupBoxTool.Location = new System.Drawing.Point(20, 295);
+            this.groupBoxTool.Location = new System.Drawing.Point(20, 329);
             this.groupBoxTool.Name = "groupBoxTool";
-            this.groupBoxTool.Size = new System.Drawing.Size(180, 53);
+            this.groupBoxTool.Size = new System.Drawing.Size(180, 57);
             this.groupBoxTool.TabIndex = 17;
             this.groupBoxTool.TabStop = false;
             this.groupBoxTool.Text = "Tool";
@@ -596,124 +564,12 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.detectVesselbutton_Click);
             // 
-            // labelPatientName
-            // 
-            this.labelPatientName.AutoSize = true;
-            this.labelPatientName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPatientName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelPatientName.Location = new System.Drawing.Point(7, 4);
-            this.labelPatientName.Name = "labelPatientName";
-            this.labelPatientName.Size = new System.Drawing.Size(94, 15);
-            this.labelPatientName.TabIndex = 1;
-            this.labelPatientName.Text = "PATIENT NAME";
-            // 
-            // labelBirthDay
-            // 
-            this.labelBirthDay.AutoSize = true;
-            this.labelBirthDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBirthDay.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelBirthDay.Location = new System.Drawing.Point(7, 79);
-            this.labelBirthDay.Name = "labelBirthDay";
-            this.labelBirthDay.Size = new System.Drawing.Size(94, 15);
-            this.labelBirthDay.TabIndex = 2;
-            this.labelBirthDay.Text = "PATIENT NAME";
-            // 
-            // labelID
-            // 
-            this.labelID.AutoSize = true;
-            this.labelID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelID.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelID.Location = new System.Drawing.Point(7, 54);
-            this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(94, 15);
-            this.labelID.TabIndex = 3;
-            this.labelID.Text = "PATIENT NAME";
-            // 
-            // labelSex
-            // 
-            this.labelSex.AutoSize = true;
-            this.labelSex.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSex.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSex.Location = new System.Drawing.Point(7, 29);
-            this.labelSex.Name = "labelSex";
-            this.labelSex.Size = new System.Drawing.Size(94, 15);
-            this.labelSex.TabIndex = 4;
-            this.labelSex.Text = "PATIENT NAME";
-            // 
-            // labelModality
-            // 
-            this.labelModality.AutoSize = true;
-            this.labelModality.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelModality.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelModality.Location = new System.Drawing.Point(7, 104);
-            this.labelModality.Name = "labelModality";
-            this.labelModality.Size = new System.Drawing.Size(94, 15);
-            this.labelModality.TabIndex = 5;
-            this.labelModality.Text = "PATIENT NAME";
-            // 
-            // labelManufacturerModel
-            // 
-            this.labelManufacturerModel.AutoSize = true;
-            this.labelManufacturerModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelManufacturerModel.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelManufacturerModel.Location = new System.Drawing.Point(592, 29);
-            this.labelManufacturerModel.Name = "labelManufacturerModel";
-            this.labelManufacturerModel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelManufacturerModel.Size = new System.Drawing.Size(94, 15);
-            this.labelManufacturerModel.TabIndex = 9;
-            this.labelManufacturerModel.Text = "PATIENT NAME";
-            // 
-            // labelSeriesDate
-            // 
-            this.labelSeriesDate.AutoSize = true;
-            this.labelSeriesDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSeriesDate.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSeriesDate.Location = new System.Drawing.Point(592, 54);
-            this.labelSeriesDate.Name = "labelSeriesDate";
-            this.labelSeriesDate.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelSeriesDate.Size = new System.Drawing.Size(94, 15);
-            this.labelSeriesDate.TabIndex = 8;
-            this.labelSeriesDate.Text = "PATIENT NAME";
-            // 
-            // labelSeriesTime
-            // 
-            this.labelSeriesTime.AutoSize = true;
-            this.labelSeriesTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSeriesTime.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSeriesTime.Location = new System.Drawing.Point(592, 79);
-            this.labelSeriesTime.Name = "labelSeriesTime";
-            this.labelSeriesTime.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelSeriesTime.Size = new System.Drawing.Size(94, 15);
-            this.labelSeriesTime.TabIndex = 7;
-            this.labelSeriesTime.Text = "PATIENT NAME";
-            // 
-            // labelHopital
-            // 
-            this.labelHopital.AutoSize = true;
-            this.labelHopital.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHopital.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelHopital.Location = new System.Drawing.Point(592, 4);
-            this.labelHopital.Name = "labelHopital";
-            this.labelHopital.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelHopital.Size = new System.Drawing.Size(94, 15);
-            this.labelHopital.TabIndex = 6;
-            this.labelHopital.Text = "PATIENT NAME";
-            // 
-            // labelSeriesDes
-            // 
-            this.labelSeriesDes.AutoSize = true;
-            this.labelSeriesDes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSeriesDes.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelSeriesDes.Location = new System.Drawing.Point(7, 636);
-            this.labelSeriesDes.Name = "labelSeriesDes";
-            this.labelSeriesDes.Size = new System.Drawing.Size(94, 15);
-            this.labelSeriesDes.TabIndex = 10;
-            this.labelSeriesDes.Text = "PATIENT NAME";
-            // 
             // pictureBoxMain
             // 
+            this.pictureBoxMain.BackColor = System.Drawing.Color.Black;
             this.pictureBoxMain.CanvasSize = new System.Drawing.Size(60, 40);
             this.pictureBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxMain.ForeColor = System.Drawing.Color.Transparent;
             this.pictureBoxMain.Image = null;
             this.pictureBoxMain.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             this.pictureBoxMain.Location = new System.Drawing.Point(0, 0);
@@ -722,29 +578,23 @@
             this.pictureBoxMain.TabIndex = 0;
             this.pictureBoxMain.Zoom = 1F;
             // 
-            // labelWDCenter
+            // label2
             // 
-            this.labelWDCenter.AutoSize = true;
-            this.labelWDCenter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWDCenter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelWDCenter.Location = new System.Drawing.Point(592, 611);
-            this.labelWDCenter.Name = "labelWDCenter";
-            this.labelWDCenter.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelWDCenter.Size = new System.Drawing.Size(94, 15);
-            this.labelWDCenter.TabIndex = 12;
-            this.labelWDCenter.Text = "PATIENT NAME";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Frame per second:";
             // 
-            // labelWDWidth
+            // labelFramePerSecond
             // 
-            this.labelWDWidth.AutoSize = true;
-            this.labelWDWidth.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWDWidth.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.labelWDWidth.Location = new System.Drawing.Point(592, 636);
-            this.labelWDWidth.Name = "labelWDWidth";
-            this.labelWDWidth.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.labelWDWidth.Size = new System.Drawing.Size(94, 15);
-            this.labelWDWidth.TabIndex = 11;
-            this.labelWDWidth.Text = "PATIENT NAME";
+            this.labelFramePerSecond.AutoSize = true;
+            this.labelFramePerSecond.Location = new System.Drawing.Point(107, 94);
+            this.labelFramePerSecond.Name = "labelFramePerSecond";
+            this.labelFramePerSecond.Size = new System.Drawing.Size(19, 13);
+            this.labelFramePerSecond.TabIndex = 9;
+            this.labelFramePerSecond.Text = "12";
             // 
             // MainForm
             // 
@@ -770,7 +620,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllTag)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -830,20 +679,9 @@
         private System.Windows.Forms.GroupBox groupBoxTool;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem fitScreenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showOverlayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem numberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.Label labelSeriesDes;
-        private System.Windows.Forms.Label labelManufacturerModel;
-        private System.Windows.Forms.Label labelSeriesDate;
-        private System.Windows.Forms.Label labelSeriesTime;
-        private System.Windows.Forms.Label labelHopital;
-        private System.Windows.Forms.Label labelModality;
-        private System.Windows.Forms.Label labelSex;
-        private System.Windows.Forms.Label labelID;
-        private System.Windows.Forms.Label labelBirthDay;
-        private System.Windows.Forms.Label labelPatientName;
-        private System.Windows.Forms.Label labelWDCenter;
-        private System.Windows.Forms.Label labelWDWidth;
+        private System.Windows.Forms.Label labelFramePerSecond;
+        private System.Windows.Forms.Label label2;
     }
 }

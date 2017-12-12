@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using Dicom;
 
 namespace ReadApp
 {
@@ -31,36 +32,12 @@ namespace ReadApp
             fitScreenToolStripMenuItem.Enabled =
             vesselDetectToolStripMenuItem.Enabled =
             compareToolStripMenuItem.Enabled = 
-            buttonExport.Enabled = 
-            labelSeriesDes.Enabled =
-            labelManufacturerModel.Enabled =
-            labelSeriesDate.Enabled =
-            labelSeriesTime.Enabled =
-            labelHopital.Enabled =
-            labelModality.Enabled =
-            labelSex.Enabled =
-            labelID.Enabled =
-            labelBirthDay.Enabled =
-            labelPatientName.Enabled =
-            labelWDCenter.Enabled =
-            labelWDWidth.Enabled = isEnabled;
+            buttonExport.Enabled = isEnabled;
             if (isEnabled)
             {
                 var frameSize = DICOMManager.shared.FrameSize;
                 labelFrameSize.Text = frameSize.Width + "x" + frameSize.Height;
                 labelFileName.Text = DICOMManager.shared.FileName;
-                //        labelSeriesDes.Text =
-                //labelManufacturerModel.Text =
-                //labelSeriesDate.Text =
-                //labelSeriesTime.Text =
-                //labelHopital.Text =
-                //labelModality.Text =
-                //labelSex.Text =
-                //labelID.Text =
-                //labelBirthDay.Text =
-                //labelPatientName.Text =
-                //labelWDCenter.Text =
-                //labelWDWidth.Text =
             }
             
         }
@@ -84,8 +61,8 @@ namespace ReadApp
             //totalFrame = (from file in Directory.EnumerateFiles(getTempFolderPath(), "*" + defaultImageFormat, SearchOption.AllDirectories)
             //                select file).Count();
             // Sets the timer interval to 5 seconds.
-            
-            myTimer.Interval = 80;
+
+            myTimer.Interval = 1000 / DICOMManager.shared.FramePerSecond;
             myTimer.Start();
             myTimer.Enabled = false;
             pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
@@ -105,6 +82,7 @@ namespace ReadApp
         private void btnPlay_Click(object sender, EventArgs e)
         {
             myTimer.Enabled = !myTimer.Enabled;
+            myTimer.Interval = 1000 / DICOMManager.shared.FramePerSecond;
             btnPlay.Image = !myTimer.Enabled ? Properties.Resources.play_blue : Properties.Resources.pause_blue;
         }
 
@@ -301,19 +279,8 @@ namespace ReadApp
 
         private void numberToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void showOverlayToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            if (showOverlayToolStripMenuItem.Checked)
-            {
-                //show
-            }
-            else
-            {
-                //hide
-            }
+            var popup = new FrameSpeed();
+            popup.ShowDialog();
         }
 
         private void vesselDetectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,6 +296,11 @@ namespace ReadApp
         private void compareToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //
+        }
+
+        public void SetFramePerSecondLabel(string number)
+        {
+            labelFramePerSecond.Text = number;
         }
     }
 }

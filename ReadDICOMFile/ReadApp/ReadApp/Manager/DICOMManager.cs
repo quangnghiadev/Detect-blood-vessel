@@ -18,11 +18,13 @@ namespace ReadApp.Manager
     {
         public static DICOMManager shared = new DICOMManager();
         private DicomImage image;
-        private string fileName;
+        private string fileName; 
         private DICOMManager()
         {
             
         }
+
+        public Int32 FramePerSecond = 12;
 
         public Double WindowWidth => image.WindowWidth;
 
@@ -162,8 +164,10 @@ namespace ReadApp.Manager
             listPatientTag.Add(DicomTag.SeriesDate);
             listPatientTag.Add(DicomTag.SeriesTime);
             listPatientTag.Add(DicomTag.SeriesDescription);
+            listPatientTag.Add(DicomTag.InstitutionName);
+            listPatientTag.Add(DicomTag.InstitutionAddress);
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 17; i++)
             {
                 var item = listPatientTag[i];
                 try
@@ -174,11 +178,13 @@ namespace ReadApp.Manager
                 {
                     Console.WriteLine("Error when read Tag:" + item.DictionaryEntry.Name);
                 }
-                if (i == 6 || i == 11)
+                if (i == 6 || i == 11 || i == 14 || i == 16)
                 {
                     listInfo.Add(new DICOMInfo());
                 }
             }
+            listInfo.Add(new DICOMInfo("WindowCenter", "Window Center",WindowCenter.ToString()));
+            listInfo.Add(new DICOMInfo("WindowWidth", "Window Width", WindowWidth.ToString()));
             return listInfo;
         }
 
@@ -204,6 +210,20 @@ namespace ReadApp.Manager
         public int getNumberOfFrame()
         {
             return image.NumberOfFrames;
+        }
+
+        public string GetValueOfTag(DicomTag tag)
+        {
+            var value = "";
+            try
+            {
+                value = image.Dataset.Get<string>(tag);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Error when read Tag: " + tag.ToString());
+            }
+            return value;
         }
     }
 }
