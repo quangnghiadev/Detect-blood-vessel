@@ -36,6 +36,8 @@
             this.imagePanelSource = new YLScsImage.ImagePanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.buttonAccurary = new System.Windows.Forms.Button();
+            this.labelTime = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -136,11 +138,33 @@
             this.buttonAccurary.UseVisualStyleBackColor = true;
             this.buttonAccurary.Click += new System.EventHandler(this.buttonAccurary_Click);
             // 
+            // labelTime
+            // 
+            this.labelTime.AutoSize = true;
+            this.labelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTime.Location = new System.Drawing.Point(575, 24);
+            this.labelTime.Name = "labelTime";
+            this.labelTime.Size = new System.Drawing.Size(15, 15);
+            this.labelTime.TabIndex = 13;
+            this.labelTime.Text = "1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(526, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(43, 15);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Time:";
+            // 
             // Result
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1098, 654);
+            this.Controls.Add(this.labelTime);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonAccurary);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.labelFrameNumber);
@@ -173,5 +197,7 @@
         private YLScsImage.ImagePanel imagePanelResult;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button buttonAccurary;
+        private System.Windows.Forms.Label labelTime;
+        private System.Windows.Forms.Label label5;
     }
 }

@@ -56,8 +56,13 @@ namespace ReadApp
                 
                 if (sfd.ShowDialog() == DialogResult.OK)
                 {
+                    var frame = cbFrame.SelectedIndex + 1;
                     var fullPath = sfd.FileName;
-                    DICOMManager.shared.ExportFrame(cbFrame.SelectedIndex + 1, getFormat(fullPath), fullPath);
+                    System.Threading.Thread t = new System.Threading.Thread(() => {
+                        DICOMManager.shared.ExportFrame(frame, getFormat(fullPath), fullPath);
+                        this.Invoke(new ShowSuccessDialog(ShowDialog));
+                    });
+                    t.Start();
                 }
             } else if(cbOptions.SelectedIndex == 1)
             {
@@ -68,17 +73,30 @@ namespace ReadApp
                     var folderPath = fullPath.Replace("."+fileType , "\\");
                     if(fileType.CompareTo("gif") ==0)
                     {
-                        DICOMManager.shared.ExportGifFile(fullPath);
+                        System.Threading.Thread t = new System.Threading.Thread(() => {
+                            DICOMManager.shared.ExportGifFile(fullPath);
+                            this.Invoke(new ShowSuccessDialog(ShowDialog));
+                        });
+                        t.Start();
                     }
                     else
                     {
-                        DICOMManager.shared.ExportAllFrame(getFormat(fullPath), folderPath);
+                        System.Threading.Thread t = new System.Threading.Thread(() => {
+                            DICOMManager.shared.ExportAllFrame(getFormat(fullPath), folderPath);
+                            this.Invoke(new ShowSuccessDialog(ShowDialog));
+                        });
+                        t.Start();
                     }
                     
                 }
             }
+        }
 
+        public delegate void ShowSuccessDialog();
 
+        private void ShowDialog()
+        {
+            MessageBox.Show("Export success!");
         }
         
         private ImageFormat getFormat(String filePath)

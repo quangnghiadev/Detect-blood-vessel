@@ -1,4 +1,5 @@
 ﻿using ReadApp.Helper;
+using ReadApp.Manager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,9 @@ namespace ReadApp
 {
     public partial class Result : Form
     {
+        public delegate void CallbackFunc();
+        private DateTime beginTime;
+        private DateTime endTime;
         public Result()
         {
             InitializeComponent();
@@ -22,8 +26,20 @@ namespace ReadApp
 
         private void Result_Load(object sender, EventArgs e)
         {
-            MatlabHelper.shared.DetectVessel();
+            beginTime = DateTime.Now;
+            System.Threading.Thread t = new System.Threading.Thread(() => {
+                MatlabHelper.shared.DetectVessel();
+                endTime = DateTime.Now;
+                this.Invoke(new CallbackFunc(SetResultImage));
+            });
+            t.Start();
+        }
+
+        private void SetResultImage()
+        {
             imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\result.tif");
+            TimeSpan ts = (endTime - beginTime);
+            labelTime.Text = String.Format("{0}:{1}", ts.Minutes, ts.Seconds);
         }
 
         private void buttonAccurary_Click(object sender, EventArgs e)

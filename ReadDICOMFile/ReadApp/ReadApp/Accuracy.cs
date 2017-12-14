@@ -14,6 +14,9 @@ namespace ReadApp
 {
     public partial class Accuracy : Form
     {
+        public delegate void CallbackFunc();
+        private double accuracyRatio = 0.0;
+
         public Accuracy()
         {
             InitializeComponent();
@@ -37,9 +40,17 @@ namespace ReadApp
                 File.Copy(openFileDialog1.FileName, desFilePath);
                 imagePanelGroundTruth.Image = MainForm.LoadImageFromPath(openFileDialog1.FileName);
 
-                var accuracyRatio = MatlabHelper.shared.CalculateAccurary();
-                labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
+                System.Threading.Thread t = new System.Threading.Thread(() => {
+                    accuracyRatio = MatlabHelper.shared.CalculateAccurary();
+                    this.Invoke(new CallbackFunc(SetAccuracyRatio));
+                });
+                t.Start();
             }
+        }
+
+        private void SetAccuracyRatio()
+        {
+            labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
         }
     }
 }

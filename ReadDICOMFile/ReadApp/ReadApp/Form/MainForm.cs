@@ -176,17 +176,28 @@ namespace ReadApp
 
         }
 
+        public delegate void CallbackFunc();
+
         private void buttonOpen_Click(object sender, System.EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
                 FillDataToGridView();
-                DICOMManager.shared.ExportAllFrameToTempFolder();
-                InitMediaPlayer();
-                ConfigUI(true);
+                System.Threading.Thread t = new System.Threading.Thread(() => {
+                    DICOMManager.shared.ExportAllFrameToTempFolder();
+                    this.Invoke(new CallbackFunc(InitMediaPlayerAndConfigUI));
+                });
+                t.Start();
             }
         }
+
+        private void InitMediaPlayerAndConfigUI()
+        {
+            InitMediaPlayer();
+            ConfigUI(true);
+        }
+
 
         private void FillDataToGridView()
         {
@@ -294,10 +305,17 @@ namespace ReadApp
             {
                 btnPlay_Click(sender, e);
             }
-            DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, Application.StartupPath + "\\matlab\\data\\source.tif");
+            System.Threading.Thread t = new System.Threading.Thread(() => {
+                DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, Application.StartupPath + "\\matlab\\data\\source.tif");
+                this.Invoke(new CallbackFunc(ShowResultDialog));
+            });
+            t.Start();
+        }
+
+        private void ShowResultDialog()
+        {
             var result = new Result();
             result.ShowDialog();
-
         }
 
         private void compareToolStripMenuItem_Click(object sender, EventArgs e)
