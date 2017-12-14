@@ -13,8 +13,8 @@ namespace ReadApp
     public partial class MainForm : Form
     {
         private Timer myTimer = new Timer();
-        private int currentFrame;
-        private string defaultImageFormat = DICOMManager.GetFilenameExtension(ImageFormat.Tiff);
+        public static int currentFrame;
+        public static string defaultImageFormat = DICOMManager.GetFilenameExtension(ImageFormat.Tiff);
         private int totalFrame;
         public MainForm()
         {
@@ -44,7 +44,7 @@ namespace ReadApp
 
         #region Media Player
 
-        private string getTempFolderPath()
+        public static string getTempFolderPath()
         {
             return Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\";
         }
@@ -159,7 +159,7 @@ namespace ReadApp
             }
         }
 
-        private Bitmap LoadImageFromPath(string path)
+        public static Bitmap LoadImageFromPath(string path)
         {
             Bitmap img;
             using (var bmpTemp = new Bitmap(path))
@@ -290,6 +290,13 @@ namespace ReadApp
 
         private void detectVesselbutton_Click(object sender, EventArgs e)
         {
+            if (myTimer.Enabled)
+            {
+                btnPlay_Click(sender, e);
+            }
+            DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, Application.StartupPath + "\\matlab\\data\\source.tif");
+            var result = new Result();
+            result.ShowDialog();
 
         }
 

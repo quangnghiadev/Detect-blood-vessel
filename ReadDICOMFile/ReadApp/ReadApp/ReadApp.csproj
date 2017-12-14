@@ -54,23 +54,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Export.cs">
+    <Compile Include="Accuracy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Export.Designer.cs">
+    <Compile Include="Accuracy.Designer.cs">
+      <DependentUpon>Accuracy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Export.Designer.cs">
       <DependentUpon>Export.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrameSpeed.cs">
+    <Compile Include="Form\FrameSpeed.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrameSpeed.Designer.cs">
+    <Compile Include="Form\FrameSpeed.Designer.cs">
       <DependentUpon>FrameSpeed.cs</DependentUpon>
     </Compile>
     <Compile Include="Helper\MatlabHelper.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Form\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Form\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Manager\DICOMManager.cs" />
@@ -83,13 +89,22 @@
     <Compile Include="CustomControl\ImagePanel.Designer.cs">
       <DependentUpon>ImagePanel.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Export.resx">
+    <Compile Include="Form\Result.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Result.Designer.cs">
+      <DependentUpon>Result.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Accuracy.resx">
+      <DependentUpon>Accuracy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Export.resx">
       <DependentUpon>Export.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrameSpeed.resx">
+    <EmbeddedResource Include="Form\FrameSpeed.resx">
       <DependentUpon>FrameSpeed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Form\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -104,6 +119,9 @@
     </Compile>
     <EmbeddedResource Include="CustomControl\ImagePanel.resx">
       <DependentUpon>ImagePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Result.resx">
+      <DependentUpon>Result.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

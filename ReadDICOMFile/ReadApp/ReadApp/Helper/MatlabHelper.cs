@@ -9,20 +9,30 @@ namespace ReadApp.Helper
 {
     class MatlabHelper
     {
-        public void CallMatlabFunc()
+        public static MatlabHelper shared = new MatlabHelper();
+        private MLApp.MLApp matlab = new MLApp.MLApp();
+        public void DetectVessel()
         {
-            // Create the MATLAB instance 
-            MLApp.MLApp matlab = new MLApp.MLApp();
+            matlab.Execute("cd " + Application.StartupPath + "\\matlab");
+            object isDone = null;
+            matlab.Feval("detect_vessel", 1, out isDone);
 
-            matlab.Execute("cd " + Application.StartupPath);
-
-            object isReadOK = null;
-            var imagePath = Application.StartupPath + "\\data\\1.jpg";
-            matlab.Feval("processImage", 1, out isReadOK, imagePath);
-
-            object[] res = isReadOK as object[];
+            object[] res = isDone as object[];
             bool result = (bool)res[0];
-            System.Console.WriteLine("Result: " + result);
+            Console.WriteLine("Result: " + result);
         }
+
+        public double CalculateAccurary()
+        {
+            matlab.Execute("cd " + Application.StartupPath + "\\matlab");
+            object acccurary = null;
+            matlab.Feval("calculate_accuracy", 1, out acccurary);
+
+            object[] res = acccurary as object[];
+            double result = (double)res[0];
+            Console.WriteLine("Result: " + result);
+            return result;
+        }
+
     }
 }
