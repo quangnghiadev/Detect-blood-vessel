@@ -37,7 +37,6 @@
             this.numberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vesselDetectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -57,10 +56,13 @@
             this.label12 = new System.Windows.Forms.Label();
             this.labelZoom = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.pictureBoxMain = new YLScsImage.ImagePanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.groupBoxMediaPlayer = new System.Windows.Forms.GroupBox();
+            this.labelFramePerSecond = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
@@ -71,9 +73,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxTool = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.pictureBoxMain = new YLScsImage.ImagePanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelFramePerSecond = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -149,8 +148,7 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.vesselDetectToolStripMenuItem,
-            this.compareToolStripMenuItem});
+            this.vesselDetectToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -158,16 +156,9 @@
             // vesselDetectToolStripMenuItem
             // 
             this.vesselDetectToolStripMenuItem.Name = "vesselDetectToolStripMenuItem";
-            this.vesselDetectToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.vesselDetectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.vesselDetectToolStripMenuItem.Text = "Vessel Detect";
             this.vesselDetectToolStripMenuItem.Click += new System.EventHandler(this.vesselDetectToolStripMenuItem_Click);
-            // 
-            // compareToolStripMenuItem
-            // 
-            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
-            this.compareToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.compareToolStripMenuItem.Text = "Compare";
-            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -180,8 +171,9 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -373,6 +365,20 @@
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 2;
             // 
+            // pictureBoxMain
+            // 
+            this.pictureBoxMain.BackColor = System.Drawing.Color.Black;
+            this.pictureBoxMain.CanvasSize = new System.Drawing.Size(60, 40);
+            this.pictureBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxMain.ForeColor = System.Drawing.Color.Transparent;
+            this.pictureBoxMain.Image = null;
+            this.pictureBoxMain.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            this.pictureBoxMain.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMain.Name = "pictureBoxMain";
+            this.pictureBoxMain.Size = new System.Drawing.Size(690, 661);
+            this.pictureBoxMain.TabIndex = 0;
+            this.pictureBoxMain.Zoom = 1F;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.buttonOpen);
@@ -432,6 +438,24 @@
             this.groupBoxMediaPlayer.TabIndex = 15;
             this.groupBoxMediaPlayer.TabStop = false;
             this.groupBoxMediaPlayer.Text = "Media Player";
+            // 
+            // labelFramePerSecond
+            // 
+            this.labelFramePerSecond.AutoSize = true;
+            this.labelFramePerSecond.Location = new System.Drawing.Point(107, 94);
+            this.labelFramePerSecond.Name = "labelFramePerSecond";
+            this.labelFramePerSecond.Size = new System.Drawing.Size(19, 13);
+            this.labelFramePerSecond.TabIndex = 9;
+            this.labelFramePerSecond.Text = "12";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Frame per second:";
             // 
             // btnNext
             // 
@@ -564,38 +588,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.detectVesselbutton_Click);
             // 
-            // pictureBoxMain
-            // 
-            this.pictureBoxMain.BackColor = System.Drawing.Color.Black;
-            this.pictureBoxMain.CanvasSize = new System.Drawing.Size(60, 40);
-            this.pictureBoxMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxMain.ForeColor = System.Drawing.Color.Transparent;
-            this.pictureBoxMain.Image = null;
-            this.pictureBoxMain.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
-            this.pictureBoxMain.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxMain.Name = "pictureBoxMain";
-            this.pictureBoxMain.Size = new System.Drawing.Size(690, 661);
-            this.pictureBoxMain.TabIndex = 0;
-            this.pictureBoxMain.Zoom = 1F;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(95, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Frame per second:";
-            // 
-            // labelFramePerSecond
-            // 
-            this.labelFramePerSecond.AutoSize = true;
-            this.labelFramePerSecond.Location = new System.Drawing.Point(107, 94);
-            this.labelFramePerSecond.Name = "labelFramePerSecond";
-            this.labelFramePerSecond.Size = new System.Drawing.Size(19, 13);
-            this.labelFramePerSecond.TabIndex = 9;
-            this.labelFramePerSecond.Text = "12";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -675,7 +667,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vesselDetectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem compareToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBoxTool;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem fitScreenToolStripMenuItem;

@@ -327,5 +327,10 @@ namespace ReadApp
         {
             labelFramePerSecond.Text = number;
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            (new About()).ShowDialog();
+        }
     }
 }

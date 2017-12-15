@@ -39,7 +39,7 @@ namespace ReadApp
         {
             imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\result.tif");
             TimeSpan ts = (endTime - beginTime);
-            labelTime.Text = String.Format("{0}:{1}", ts.Minutes, ts.Seconds);
+            labelTime.Text = (ts.Seconds + ts.Milliseconds*0.001).ToString() + " s";
         }
 
         private void buttonAccurary_Click(object sender, EventArgs e)
