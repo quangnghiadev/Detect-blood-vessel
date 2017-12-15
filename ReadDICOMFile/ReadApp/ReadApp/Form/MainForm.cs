@@ -31,7 +31,6 @@ namespace ReadApp
             exportToolStripMenuItem.Enabled = 
             fitScreenToolStripMenuItem.Enabled =
             vesselDetectToolStripMenuItem.Enabled =
-            compareToolStripMenuItem.Enabled = 
             buttonExport.Enabled = isEnabled;
             if (isEnabled)
             {
@@ -331,6 +330,17 @@ namespace ReadApp
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             (new About()).ShowDialog();
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DICOMManager.shared.Release();
+            ConfigUI(false);
+            //dataGridViewAllTag.Rows.Clear();
+            dataGridViewAllTag.DataSource = null;
+            //dataGridViewPatientTag.Rows.Clear();
+            dataGridViewPatientTag.DataSource = null;
+            pictureBoxMain.Image = null;
         }
     }
 }

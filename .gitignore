@@ -258,3 +258,6 @@ paket-files/
 __pycache__/
 *.pyc
 ReadDICOMFile/ReadApp/ReadApp/bin/Debug/ReadApp.exe
+ReadDICOMFile/ReadApp/ReadApp/bin/Debug/matlab/data/source.tif
+ReadDICOMFile/ReadApp/ReadApp/bin/Debug/matlab/data/result.tif
+ReadDICOMFile/ReadApp/ReadApp/bin/Debug/data/

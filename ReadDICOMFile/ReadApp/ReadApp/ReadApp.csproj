@@ -54,10 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accuracy.cs">
+    <Compile Include="Form\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Accuracy.Designer.cs">
+    <Compile Include="Form\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Accuracy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Accuracy.Designer.cs">
       <DependentUpon>Accuracy.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\Export.cs">
@@ -95,7 +101,10 @@
     <Compile Include="Form\Result.Designer.cs">
       <DependentUpon>Result.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Accuracy.resx">
+    <EmbeddedResource Include="Form\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Accuracy.resx">
       <DependentUpon>Accuracy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Export.resx">

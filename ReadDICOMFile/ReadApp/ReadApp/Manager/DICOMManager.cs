@@ -43,6 +43,12 @@ namespace ReadApp.Manager
             this.fileName = fileName;
         }
 
+        public void Release()
+        {
+            image = null;
+            fileName = "";
+        }
+
         public void ExportFrame(int frameNumber, ImageFormat format, string filePath)
         {
             if (frameNumber >= 0 && frameNumber <= image.NumberOfFrames)
