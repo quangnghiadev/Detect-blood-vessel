@@ -30,8 +30,22 @@ namespace ReadApp
 
         private void imagePanelGroundTruth_Click(object sender, EventArgs e)
         {
+            if (buttonOpenGroundTruth.Visible == false)
+            {
+                buttonOpenGroundTruth_Click(sender, e);
+            }
+        }
+
+        private void SetAccuracyRatio()
+        {
+            labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
+        }
+
+        private void buttonOpenGroundTruth_Click(object sender, EventArgs e)
+        {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                buttonOpenGroundTruth.Visible = false;
                 var desFilePath = Application.StartupPath + "\\matlab\\data\\groundtruth.jpg";/* + Path.GetExtension(openFileDialog1.FileName)*/
                 if (File.Exists(desFilePath))
                 {
@@ -46,11 +60,6 @@ namespace ReadApp
                 });
                 t.Start();
             }
-        }
-
-        private void SetAccuracyRatio()
-        {
-            labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
         }
     }
 }

@@ -36,6 +36,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonOpenGroundTruth = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -102,6 +103,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.buttonOpenGroundTruth);
             this.groupBox2.Controls.Add(this.imagePanelGroundTruth);
             this.groupBox2.Location = new System.Drawing.Point(556, 12);
             this.groupBox2.Name = "groupBox2";
@@ -119,6 +121,17 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Result";
+            // 
+            // buttonOpenGroundTruth
+            // 
+            this.buttonOpenGroundTruth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpenGroundTruth.Location = new System.Drawing.Point(221, 248);
+            this.buttonOpenGroundTruth.Name = "buttonOpenGroundTruth";
+            this.buttonOpenGroundTruth.Size = new System.Drawing.Size(107, 23);
+            this.buttonOpenGroundTruth.TabIndex = 10;
+            this.buttonOpenGroundTruth.Text = "Open Ground Truth ";
+            this.buttonOpenGroundTruth.UseVisualStyleBackColor = true;
+            this.buttonOpenGroundTruth.Click += new System.EventHandler(this.buttonOpenGroundTruth_Click);
             // 
             // Accuracy
             // 
@@ -152,5 +165,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button buttonOpenGroundTruth;
     }
 }
