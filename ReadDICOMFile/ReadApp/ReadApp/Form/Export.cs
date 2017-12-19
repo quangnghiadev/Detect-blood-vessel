@@ -19,7 +19,7 @@ namespace ReadApp
         {
             InitializeComponent();
             cbOptions.SelectedIndex = 1;
-            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount + 1).ToArray();
+            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount).ToArray();
             cbFrame.DataSource = arr;
         }
 

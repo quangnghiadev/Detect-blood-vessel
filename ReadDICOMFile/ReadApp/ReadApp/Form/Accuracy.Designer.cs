@@ -35,8 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonOpenGroundTruth = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -112,6 +112,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ground Truth";
             // 
+            // buttonOpenGroundTruth
+            // 
+            this.buttonOpenGroundTruth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOpenGroundTruth.Location = new System.Drawing.Point(202, 247);
+            this.buttonOpenGroundTruth.Name = "buttonOpenGroundTruth";
+            this.buttonOpenGroundTruth.Size = new System.Drawing.Size(154, 23);
+            this.buttonOpenGroundTruth.TabIndex = 10;
+            this.buttonOpenGroundTruth.Text = "Open Ground Truth ";
+            this.buttonOpenGroundTruth.UseVisualStyleBackColor = true;
+            this.buttonOpenGroundTruth.Click += new System.EventHandler(this.buttonOpenGroundTruth_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.imagePanelResult);
@@ -121,17 +132,6 @@
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Result";
-            // 
-            // buttonOpenGroundTruth
-            // 
-            this.buttonOpenGroundTruth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOpenGroundTruth.Location = new System.Drawing.Point(221, 248);
-            this.buttonOpenGroundTruth.Name = "buttonOpenGroundTruth";
-            this.buttonOpenGroundTruth.Size = new System.Drawing.Size(107, 23);
-            this.buttonOpenGroundTruth.TabIndex = 10;
-            this.buttonOpenGroundTruth.Text = "Open Ground Truth ";
-            this.buttonOpenGroundTruth.UseVisualStyleBackColor = true;
-            this.buttonOpenGroundTruth.Click += new System.EventHandler(this.buttonOpenGroundTruth_Click);
             // 
             // Accuracy
             // 

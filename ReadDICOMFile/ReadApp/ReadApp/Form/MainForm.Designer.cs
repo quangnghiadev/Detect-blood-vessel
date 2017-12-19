@@ -31,6 +31,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fitScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxTool = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buttonEditFramePerSecond = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -106,21 +107,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -425,6 +433,7 @@
             // 
             // groupBoxMediaPlayer
             // 
+            this.groupBoxMediaPlayer.Controls.Add(this.buttonEditFramePerSecond);
             this.groupBoxMediaPlayer.Controls.Add(this.labelFramePerSecond);
             this.groupBoxMediaPlayer.Controls.Add(this.label2);
             this.groupBoxMediaPlayer.Controls.Add(this.btnNext);
@@ -590,12 +599,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.detectVesselbutton_Click);
             // 
-            // closeToolStripMenuItem
+            // buttonEditFramePerSecond
             // 
-            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.buttonEditFramePerSecond.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonEditFramePerSecond.Location = new System.Drawing.Point(134, 89);
+            this.buttonEditFramePerSecond.Name = "buttonEditFramePerSecond";
+            this.buttonEditFramePerSecond.Size = new System.Drawing.Size(38, 23);
+            this.buttonEditFramePerSecond.TabIndex = 10;
+            this.buttonEditFramePerSecond.Text = "Edit";
+            this.buttonEditFramePerSecond.UseVisualStyleBackColor = true;
+            this.buttonEditFramePerSecond.Click += new System.EventHandler(this.buttonEditFramePerSecond_Click);
             // 
             // MainForm
             // 
@@ -684,5 +697,6 @@
         private System.Windows.Forms.Label labelFramePerSecond;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.Button buttonEditFramePerSecond;
     }
 }

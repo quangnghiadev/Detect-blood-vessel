@@ -311,6 +311,7 @@ namespace ReadApp
                 {
                     DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, filePath);
                 }
+                File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif",true);
                 this.Invoke(new CallbackFunc(ShowResultDialog));
             });
             t.Start();
@@ -346,6 +347,11 @@ namespace ReadApp
             //dataGridViewPatientTag.Rows.Clear();
             dataGridViewPatientTag.DataSource = null;
             pictureBoxMain.Image = null;
+        }
+
+        private void buttonEditFramePerSecond_Click(object sender, EventArgs e)
+        {
+            numberToolStripMenuItem_Click(sender, e);
         }
     }
 }

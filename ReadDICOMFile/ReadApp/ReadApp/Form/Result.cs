@@ -21,21 +21,31 @@ namespace ReadApp
         private DateTime endTime;
         private string sourceFileName;
         private string resultFileName;
+        private int currentFrame;
+        private bool firstLoad;
         public Result()
         {
             InitializeComponent();
-            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount + 1).ToArray();
+            firstLoad = true;
+            this.currentFrame = MainForm.currentFrame;
+            int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount).ToArray();
             comboBoxFrameNumber.DataSource = arr;
-            comboBoxFrameNumber.SelectedIndex = 1;
-            sourceFileName = DICOMManager.shared.FileName + "_" + MainForm.currentFrame.ToString() + ".tif";
+            comboBoxFrameNumber.SelectedIndex = currentFrame - 1;
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            sourceFileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
             resultFileName = "result_" + sourceFileName;
-            labelFrameNumber.Text = MainForm.currentFrame.ToString();
+            labelFrameNumber.Text = currentFrame.ToString();
             imagePanelSource.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\" + sourceFileName);
+            Detect();
         }
 
         private void Result_Load(object sender, EventArgs e)
         {
-            Detect();
+            
         }
 
         private void Detect(bool forceRun = false)
@@ -44,7 +54,7 @@ namespace ReadApp
             if (forceRun)
             {
                 System.Threading.Thread t = new System.Threading.Thread(() => {
-                    MatlabHelper.shared.DetectVessel(sourceFileName);
+                    MatlabHelper.shared.DetectVessel();
                     endTime = DateTime.Now;
                     this.Invoke(new CallbackFunc(SetResultImage));
                 });
@@ -55,7 +65,7 @@ namespace ReadApp
                 if (!File.Exists(Application.StartupPath + "\\matlab\\data\\" + resultFileName))
                 {
                     System.Threading.Thread t = new System.Threading.Thread(() => {
-                        MatlabHelper.shared.DetectVessel(sourceFileName);
+                        MatlabHelper.shared.DetectVessel();
                         endTime = DateTime.Now;
                         this.Invoke(new CallbackFunc(SetResultImage));
                     });
@@ -71,7 +81,10 @@ namespace ReadApp
 
         private void SetResultImage()
         {
-            imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\" + resultFileName);
+            var sourcePath = Application.StartupPath + "\\matlab\\data\\result.tif";
+            var desPath = Application.StartupPath + "\\matlab\\data\\" + resultFileName;
+            File.Copy(sourcePath, desPath,true);
+            imagePanelResult.Image = MainForm.LoadImageFromPath(desPath);
             TimeSpan ts = (endTime - beginTime);
             labelTime.Text = (ts.Seconds + ts.Milliseconds*0.001).ToString() + " s";
         }
@@ -84,8 +97,23 @@ namespace ReadApp
 
         private void comboBoxFrameNumber_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //var currentFrame = Convert.ToInt32(comboBoxFrameNumber.SelectedValue);
-            //DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, Application.StartupPath + "\\matlab\\data\\source.tif");
+            if (firstLoad)
+            {
+                firstLoad = false;
+                return;
+            }
+            currentFrame = Convert.ToInt32(comboBoxFrameNumber.SelectedValue);
+            System.Threading.Thread t = new System.Threading.Thread(() => {
+                var fileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
+                var filePath = Application.StartupPath + "\\matlab\\data\\" + fileName;
+                if (!File.Exists(filePath))
+                {
+                    DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, filePath);
+                }
+                File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif", true);
+                this.Invoke(new CallbackFunc(LoadData));
+            });
+            t.Start();
         }
 
         private void buttonForceDetect_Click(object sender, EventArgs e)
