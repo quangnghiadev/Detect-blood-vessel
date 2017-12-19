@@ -305,7 +305,12 @@ namespace ReadApp
                 btnPlay_Click(sender, e);
             }
             System.Threading.Thread t = new System.Threading.Thread(() => {
-                DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, Application.StartupPath + "\\matlab\\data\\source.tif");
+                var fileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
+                var filePath = Application.StartupPath + "\\matlab\\data\\" + fileName;
+                if (!File.Exists(filePath))
+                {
+                    DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, filePath);
+                }
                 this.Invoke(new CallbackFunc(ShowResultDialog));
             });
             t.Start();

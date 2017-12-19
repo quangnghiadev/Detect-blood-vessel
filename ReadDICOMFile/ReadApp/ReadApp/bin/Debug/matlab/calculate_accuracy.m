@@ -1,8 +1,8 @@
-function ratio = calculate_accuracy()
+function ratio = calculate_accuracy(resultFileName)
 %% Add necessary paths
 
 addpath(genpath('./data'));
-img = im2bw(imread('result.tif'));
+img = im2bw(imread(resultFileName));
 truth_img = im2bw(imread('groundtruth.jpg'));
 truth_img=im2bw(truth_img,0.5);
  P = find(truth_img == 1 & img == 1);

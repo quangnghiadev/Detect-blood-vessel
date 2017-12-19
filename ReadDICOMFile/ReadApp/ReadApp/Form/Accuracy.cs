@@ -16,11 +16,13 @@ namespace ReadApp
     {
         public delegate void CallbackFunc();
         private double accuracyRatio = 0.0;
+        private string resultFile;
 
-        public Accuracy()
+        public Accuracy(string fileName)
         {
+            this.resultFile = fileName;
             InitializeComponent();
-            imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\result.tif");
+            imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\" + resultFile);
         }
 
         private void Accuracy_Load(object sender, EventArgs e)
@@ -55,7 +57,7 @@ namespace ReadApp
                 imagePanelGroundTruth.Image = MainForm.LoadImageFromPath(openFileDialog1.FileName);
 
                 System.Threading.Thread t = new System.Threading.Thread(() => {
-                    accuracyRatio = MatlabHelper.shared.CalculateAccurary();
+                    accuracyRatio = MatlabHelper.shared.CalculateAccurary(resultFile);
                     this.Invoke(new CallbackFunc(SetAccuracyRatio));
                 });
                 t.Start();
