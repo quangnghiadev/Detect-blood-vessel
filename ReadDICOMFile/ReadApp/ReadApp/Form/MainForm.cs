@@ -309,7 +309,7 @@ namespace ReadApp
                 var filePath = Application.StartupPath + "\\matlab\\data\\" + fileName;
                 if (!File.Exists(filePath))
                 {
-                    DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, filePath);
+                    File.Copy(Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\" + currentFrame.ToString() + ".tif", filePath, true);
                 }
                 File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif",true);
                 this.Invoke(new CallbackFunc(ShowResultDialog));

@@ -22,11 +22,9 @@ namespace ReadApp
         private string sourceFileName;
         private string resultFileName;
         private int currentFrame;
-        private bool firstLoad;
         public Result()
         {
             InitializeComponent();
-            firstLoad = true;
             this.currentFrame = MainForm.currentFrame;
             int[] arr = Enumerable.Range(1, DICOMManager.shared.FrameCount).ToArray();
             comboBoxFrameNumber.DataSource = arr;
@@ -36,6 +34,7 @@ namespace ReadApp
 
         private void LoadData()
         {
+            
             sourceFileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
             resultFileName = "result_" + sourceFileName;
             labelFrameNumber.Text = currentFrame.ToString();
@@ -45,7 +44,7 @@ namespace ReadApp
 
         private void Result_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Detect(bool forceRun = false)
@@ -64,6 +63,7 @@ namespace ReadApp
             {
                 if (!File.Exists(Application.StartupPath + "\\matlab\\data\\" + resultFileName))
                 {
+                    
                     System.Threading.Thread t = new System.Threading.Thread(() => {
                         MatlabHelper.shared.DetectVessel();
                         endTime = DateTime.Now;
@@ -76,6 +76,7 @@ namespace ReadApp
                     imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\" + resultFileName);
                     labelTime.Text = "Extracted output";
                 }
+                this.comboBoxFrameNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxFrameNumber_SelectedIndexChanged);
             }
         }
 
@@ -97,18 +98,13 @@ namespace ReadApp
 
         private void comboBoxFrameNumber_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (firstLoad)
-            {
-                firstLoad = false;
-                return;
-            }
             currentFrame = Convert.ToInt32(comboBoxFrameNumber.SelectedValue);
             System.Threading.Thread t = new System.Threading.Thread(() => {
                 var fileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
                 var filePath = Application.StartupPath + "\\matlab\\data\\" + fileName;
                 if (!File.Exists(filePath))
                 {
-                    DICOMManager.shared.ExportFrame(currentFrame - 1, ImageFormat.Tiff, filePath);
+                    File.Copy(Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\" + currentFrame.ToString() + ".tif", filePath, true);
                 }
                 File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif", true);
                 this.Invoke(new CallbackFunc(LoadData));

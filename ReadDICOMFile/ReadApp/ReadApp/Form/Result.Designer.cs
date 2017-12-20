@@ -199,7 +199,6 @@
             this.comboBoxFrameNumber.Name = "comboBoxFrameNumber";
             this.comboBoxFrameNumber.Size = new System.Drawing.Size(47, 21);
             this.comboBoxFrameNumber.TabIndex = 18;
-            this.comboBoxFrameNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxFrameNumber_SelectedIndexChanged);
             // 
             // Result
             // 
