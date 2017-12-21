@@ -34,7 +34,8 @@ namespace ReadApp
 
         private void LoadData()
         {
-            
+            Cursor.Current = Cursors.WaitCursor;
+
             sourceFileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
             resultFileName = "result_" + sourceFileName;
             labelFrameNumber.Text = currentFrame.ToString();
@@ -82,12 +83,14 @@ namespace ReadApp
 
         private void SetResultImage()
         {
+            
             var sourcePath = Application.StartupPath + "\\matlab\\data\\result.tif";
             var desPath = Application.StartupPath + "\\matlab\\data\\" + resultFileName;
             File.Copy(sourcePath, desPath,true);
             imagePanelResult.Image = MainForm.LoadImageFromPath(desPath);
             TimeSpan ts = (endTime - beginTime);
             labelTime.Text = (ts.Seconds + ts.Milliseconds*0.001).ToString() + " s";
+            Cursor.Current = Cursors.Default;
         }
 
         private void buttonAccurary_Click(object sender, EventArgs e)

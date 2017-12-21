@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Dicom;
+using ReadApp.Helper;
 
 namespace ReadApp
 {
@@ -16,9 +17,11 @@ namespace ReadApp
         public static int currentFrame;
         public static string defaultImageFormat = DICOMManager.GetFilenameExtension(ImageFormat.Tiff);
         private int totalFrame;
+        
         public MainForm()
         {
             InitializeComponent();
+            pictureBox1.Hide();
             myTimer.Tick += new EventHandler(TimerEventProcessor);
             ConfigUI(false);
         }
@@ -65,6 +68,7 @@ namespace ReadApp
             myTimer.Start();
             myTimer.Enabled = false;
             pictureBoxMain.Image = LoadImageFromPath(getTempFolderPath() + currentFrame + defaultImageFormat);
+            Cursor.Current = Cursors.Default;
         }
 
         private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
@@ -181,6 +185,8 @@ namespace ReadApp
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                Cursor.Current = Cursors.WaitCursor;
+                //pictureBox1.Show();
                 DICOMManager.shared.Read(openFileDialog1.FileName, openFileDialog1.SafeFileName);
                 FillDataToGridView();
                 System.Threading.Thread t = new System.Threading.Thread(() => {
@@ -193,6 +199,8 @@ namespace ReadApp
 
         private void InitMediaPlayerAndConfigUI()
         {
+            
+            pictureBox1.Hide();
             InitMediaPlayer();
             ConfigUI(true);
         }

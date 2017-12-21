@@ -41,6 +41,7 @@ namespace ReadApp
 
         private void SetAccuracyRatio()
         {
+            Cursor.Current = Cursors.Default;
             labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
         }
 
@@ -48,6 +49,7 @@ namespace ReadApp
         {
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                Cursor.Current = Cursors.WaitCursor;
                 buttonOpenGroundTruth.Visible = false;
                 var desFilePath = Application.StartupPath + "\\matlab\\data\\groundtruth.jpg";/* + Path.GetExtension(openFileDialog1.FileName)*/
                 if (File.Exists(desFilePath))

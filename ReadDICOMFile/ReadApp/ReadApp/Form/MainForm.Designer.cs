@@ -62,6 +62,7 @@
             this.buttonOpen = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.groupBoxMediaPlayer = new System.Windows.Forms.GroupBox();
+            this.buttonEditFramePerSecond = new System.Windows.Forms.Button();
             this.labelFramePerSecond = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnNext = new System.Windows.Forms.Button();
@@ -74,7 +75,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxTool = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.buttonEditFramePerSecond = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -91,6 +92,7 @@
             this.groupBoxImage.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxTool.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -362,6 +364,7 @@
             this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.AutoScrollMinSize = new System.Drawing.Size(600, 600);
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.Black;
+            this.splitContainer1.Panel1.Controls.Add(this.pictureBox1);
             this.splitContainer1.Panel1.Controls.Add(this.pictureBoxMain);
             this.splitContainer1.Panel1MinSize = 690;
             // 
@@ -449,6 +452,17 @@
             this.groupBoxMediaPlayer.TabIndex = 15;
             this.groupBoxMediaPlayer.TabStop = false;
             this.groupBoxMediaPlayer.Text = "Media Player";
+            // 
+            // buttonEditFramePerSecond
+            // 
+            this.buttonEditFramePerSecond.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonEditFramePerSecond.Location = new System.Drawing.Point(134, 89);
+            this.buttonEditFramePerSecond.Name = "buttonEditFramePerSecond";
+            this.buttonEditFramePerSecond.Size = new System.Drawing.Size(38, 23);
+            this.buttonEditFramePerSecond.TabIndex = 10;
+            this.buttonEditFramePerSecond.Text = "Edit";
+            this.buttonEditFramePerSecond.UseVisualStyleBackColor = true;
+            this.buttonEditFramePerSecond.Click += new System.EventHandler(this.buttonEditFramePerSecond_Click);
             // 
             // labelFramePerSecond
             // 
@@ -599,16 +613,15 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.detectVesselbutton_Click);
             // 
-            // buttonEditFramePerSecond
+            // pictureBox1
             // 
-            this.buttonEditFramePerSecond.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonEditFramePerSecond.Location = new System.Drawing.Point(134, 89);
-            this.buttonEditFramePerSecond.Name = "buttonEditFramePerSecond";
-            this.buttonEditFramePerSecond.Size = new System.Drawing.Size(38, 23);
-            this.buttonEditFramePerSecond.TabIndex = 10;
-            this.buttonEditFramePerSecond.Text = "Edit";
-            this.buttonEditFramePerSecond.UseVisualStyleBackColor = true;
-            this.buttonEditFramePerSecond.Click += new System.EventHandler(this.buttonEditFramePerSecond_Click);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::ReadApp.Properties.Resources.ajax_loader;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(690, 661);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
             // 
             // MainForm
             // 
@@ -644,6 +657,7 @@
             this.groupBoxImage.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.groupBoxTool.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -698,5 +712,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.Button buttonEditFramePerSecond;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
