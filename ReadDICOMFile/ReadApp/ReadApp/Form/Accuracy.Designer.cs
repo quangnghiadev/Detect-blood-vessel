@@ -94,9 +94,9 @@
             // 
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.labelAccuracy);
-            this.groupBox3.Location = new System.Drawing.Point(482, 553);
+            this.groupBox3.Location = new System.Drawing.Point(475, 553);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(129, 42);
+            this.groupBox3.Size = new System.Drawing.Size(136, 42);
             this.groupBox3.TabIndex = 19;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Information";

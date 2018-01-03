@@ -42,7 +42,7 @@ namespace ReadApp
         private void SetAccuracyRatio()
         {
             Cursor.Current = Cursors.Default;
-            labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio) + "%";
+            labelAccuracy.Text = String.Format("{0:0.00}", accuracyRatio*100) + "%";
         }
 
         private void buttonOpenGroundTruth_Click(object sender, EventArgs e)

@@ -68,7 +68,14 @@ namespace ReadApp
                     System.Threading.Thread t = new System.Threading.Thread(() => {
                         MatlabHelper.shared.DetectVessel();
                         endTime = DateTime.Now;
-                        this.Invoke(new CallbackFunc(SetResultImage));
+                        try
+                        {
+                            this.Invoke(new CallbackFunc(SetResultImage));
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Exception - Multi thread");
+                        }
                     });
                     t.Start();
                 }
@@ -83,13 +90,12 @@ namespace ReadApp
 
         private void SetResultImage()
         {
-            
             var sourcePath = Application.StartupPath + "\\matlab\\data\\result.tif";
             var desPath = Application.StartupPath + "\\matlab\\data\\" + resultFileName;
-            File.Copy(sourcePath, desPath,true);
+            File.Copy(sourcePath, desPath, true);
             imagePanelResult.Image = MainForm.LoadImageFromPath(desPath);
             TimeSpan ts = (endTime - beginTime);
-            labelTime.Text = (ts.Seconds + ts.Milliseconds*0.001).ToString() + " s";
+            labelTime.Text = (ts.Seconds + ts.Milliseconds * 0.001).ToString() + " s";
             Cursor.Current = Cursors.Default;
         }
 
