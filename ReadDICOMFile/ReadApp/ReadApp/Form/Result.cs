@@ -111,11 +111,18 @@ namespace ReadApp
             System.Threading.Thread t = new System.Threading.Thread(() => {
                 var fileName = DICOMManager.shared.FileName + "_" + currentFrame.ToString() + ".tif";
                 var filePath = Application.StartupPath + "\\matlab\\data\\" + fileName;
-                if (!File.Exists(filePath))
+                try
                 {
-                    File.Copy(Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\" + currentFrame.ToString() + ".tif", filePath, true);
+                    if (!File.Exists(filePath))
+                    {
+                        File.Copy(Application.StartupPath + "\\data\\" + DICOMManager.shared.FileName + "\\" + currentFrame.ToString() + ".tif", filePath, true);
+                    }
+                    File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif", true);
                 }
-                File.Copy(filePath, Application.StartupPath + "\\matlab\\data\\source.tif", true);
+                catch (Exception)
+                {
+                    Console.WriteLine("File is used by another process!");
+                }
                 this.Invoke(new CallbackFunc(LoadData));
             });
             t.Start();
