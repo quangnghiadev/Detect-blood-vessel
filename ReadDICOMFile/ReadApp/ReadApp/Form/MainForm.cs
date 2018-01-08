@@ -191,6 +191,10 @@ namespace ReadApp
                 FillDataToGridView();
                 System.Threading.Thread t = new System.Threading.Thread(() => {
                     DICOMManager.shared.ExportAllFrameToTempFolder();
+                    var fileMaskName = DICOMManager.shared.FileName == "86698391" ? "mask_1.tif" : "mask_2.tif";
+                    var fileMaskSourcePath = Application.StartupPath + "\\matlab\\data\\mask\\source\\" + fileMaskName;
+                    var fileMaskDesPath = Application.StartupPath + "\\matlab\\data\\mask\\mask.tif";
+                    File.Copy(fileMaskSourcePath, fileMaskDesPath, true);
                     this.Invoke(new CallbackFunc(InitMediaPlayerAndConfigUI));
                 });
                 t.Start();
