@@ -22,6 +22,7 @@ namespace ReadApp
         private string sourceFileName;
         private string resultFileName;
         private int currentFrame;
+        private bool isRunning = false;
         public Result()
         {
             InitializeComponent();
@@ -50,6 +51,13 @@ namespace ReadApp
 
         private void Detect(bool forceRun = false)
         {
+            if (isRunning)
+            {
+                return;
+            }
+            isRunning = true;
+            this.buttonForceDetect.Enabled = false;
+            this.comboBoxFrameNumber.Enabled = false;
             beginTime = DateTime.Now;
             if (forceRun)
             {
@@ -83,6 +91,9 @@ namespace ReadApp
                 {
                     imagePanelResult.Image = MainForm.LoadImageFromPath(Application.StartupPath + "\\matlab\\data\\" + resultFileName);
                     labelTime.Text = "Extracted output";
+                    buttonForceDetect.Enabled = true;
+                    this.comboBoxFrameNumber.Enabled = true;
+                    isRunning = false;
                 }
                 this.comboBoxFrameNumber.SelectedIndexChanged += new System.EventHandler(this.comboBoxFrameNumber_SelectedIndexChanged);
             }
@@ -97,6 +108,9 @@ namespace ReadApp
             TimeSpan ts = (endTime - beginTime);
             labelTime.Text = (ts.Seconds + ts.Milliseconds * 0.001).ToString() + " s";
             Cursor.Current = Cursors.Default;
+            buttonForceDetect.Enabled = true;
+            comboBoxFrameNumber.Enabled = true;
+            isRunning = false;
         }
 
         private void buttonAccurary_Click(object sender, EventArgs e)
