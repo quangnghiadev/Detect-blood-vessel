@@ -25,7 +25,7 @@ io1=min_openings(im,LEN_o,20);
 % ix = mat2gray(ic1-io1);
 
 
-io1=min_openings(io1,LEN_o,20);
+
 % figure,imshow(io1);title('min openning 20');
 % 
 iv=mat2gray(ic1-io1);
@@ -40,7 +40,7 @@ imF=reconstruction_by_erosion(imL,LEN_c,DEG_NUM);
 % figure,imshow(imF);title('imF');
 % % %% Hysteresis thresholding
 TH_LOW=12;
-TH_HIGH=27;  % 5_land  reduce this parameter to show blur vessel
+TH_HIGH=33;  % 5_land  reduce this parameter to show blur vessel
 min_obj=180;
 min_hole=10;
 %
