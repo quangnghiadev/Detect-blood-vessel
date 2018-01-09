@@ -7,7 +7,7 @@ function imC2=reconstruction_by_dilation(im,LEN,DEG_NUM)
 %     DEG_NUM (defualt:12)
 % OUTPUT: 
 %     imC2 
-if nargin<3 || isempty(LEN)
+if nargin<3 || isempty(LEN)                                                 %Number of function input arguments - nargin
     LEN=11;
 end
 if nargin<3 || isempty(DEG_NUM)

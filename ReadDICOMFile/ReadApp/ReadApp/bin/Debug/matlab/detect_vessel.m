@@ -3,6 +3,6 @@ function result = detect_vessel()
 addpath(genpath('./data'));
 addpath(genpath('./functions'));
 %% Demo
-acode_main_retin_vessel_seg
+detect_main
 result = true;
 end
