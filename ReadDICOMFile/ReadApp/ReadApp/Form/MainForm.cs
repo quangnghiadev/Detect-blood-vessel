@@ -183,6 +183,7 @@ namespace ReadApp
 
         private void buttonOpen_Click(object sender, System.EventArgs e)
         {
+            ConfigUI(false);
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -198,6 +199,10 @@ namespace ReadApp
                     this.Invoke(new CallbackFunc(InitMediaPlayerAndConfigUI));
                 });
                 t.Start();
+            }
+            else
+            {
+                ConfigUI(true);
             }
         }
 
